@@ -17,10 +17,8 @@ public class DashboardController {
     @Autowired
     private CategoryService categoryService;// Đảm bảo bạn đã inject CategoryService
 
-    // Display a list of all products
     @GetMapping
-    public String home(Model model){
-        model.addAttribute("products", productService.getProductsByIsDeleted(false));
-        return "index";
+    public String home() {;
+        return "/dashboard/index";
     }
 }

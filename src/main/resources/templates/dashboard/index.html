@@ -3,7 +3,7 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security5"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{dashboard-layout}">
 <head>
-    <title th:text="${title} ?: 'Products List Trash'">Thùng rác</title>
+    <title th:text="${title} ?: 'Products List'">Products List</title>
     <layout:fragment name="head"></layout:fragment>
 </head>
 <body>
@@ -30,10 +30,20 @@
             <td> <!-- Hiển thị nút sửa và xóa chỉ dành cho người dùng ADMIN -->
                 <div>
                     <!--                    sec:authorize="hasAuthority('ADMIN')"-->
-                    <a th:href="@{/admin/dashboard/products/restore/{id}(id=${product.id})}" class="btn btn-success btn-sm">Khôi phục</a>
-                    <a th:href="@{/admin/dashboard/products/destroy/{id}(id=${product.id})}" class="btn btn-danger btn-sm"
+                    <a th:href="@{/admin/dashboard/products/edit/{id}(id=${product.id})}" class="btn btn-success btn-sm">Sửa</a>
+                    <a th:href="@{/admin/dashboard/products/delete/{id}(id=${product.id})}" class="btn btn-danger btn-sm"
                        onclick="return confirm('Bạn có chắc không?')">Xóa</a>
                 </div>
+            </td>
+            <td> <!-- Nút thêm vào giỏ hàng, hiển thị cho tất cả người dùng đã xác thực sec:authorize="isAuthenticated()" trong form -->
+                <form th:action="@{/cart/add}" method="post" >
+                    <input type="number" name="quantity"
+                           min="1" value="1"
+                           class="form-control d-inline-block"
+                           style="width: 70px;">
+                    <input type="hidden" th:value="${product.id}" name="productId"/>
+                    <button type="submit" class="btn btn-warning btn-sm">Thêm Vào Giỏ</button>
+                </form>
             </td>
         </tr>
         </tbody>

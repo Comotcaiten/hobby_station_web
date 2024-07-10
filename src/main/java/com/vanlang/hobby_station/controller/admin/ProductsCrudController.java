@@ -35,7 +35,7 @@ public class ProductsCrudController {
     {
         model.addAttribute("products",productService.getProductsByIsDeleted(true));
         model.addAttribute("opt", new String("products"));
-        return "/products/trash-can";
+        return "/products/trash-can-products";
     }
 
     // For adding a new product
