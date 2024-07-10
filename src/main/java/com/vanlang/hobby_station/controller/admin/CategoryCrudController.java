@@ -1,4 +1,4 @@
-package com.vanlang.hobby_station.controller;
+package com.vanlang.hobby_station.controller.admin;
 
 import com.vanlang.hobby_station.model.Category;
 import com.vanlang.hobby_station.service.CategoryService;
@@ -17,7 +17,7 @@ import java.util.List;
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/admin/dashboard/categories")
-public class DashboardCategoryController {
+public class CategoryCrudController {
     @Autowired
     private final CategoryService categoryService;
 

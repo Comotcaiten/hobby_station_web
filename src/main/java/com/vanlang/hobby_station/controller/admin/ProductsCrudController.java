@@ -1,4 +1,4 @@
-package com.vanlang.hobby_station.controller;
+package com.vanlang.hobby_station.controller.admin;
 
 import com.vanlang.hobby_station.model.Product;
 import com.vanlang.hobby_station.service.CategoryService;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/admin/dashboard/products")
-public class DashboardProductsController {
+public class ProductsCrudController {
     @Autowired
     private ProductService productService;
     @Autowired
