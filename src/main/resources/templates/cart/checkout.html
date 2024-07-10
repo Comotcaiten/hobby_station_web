@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head><title th:text="${title} ?: 'Your Cart'">Place Order</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body>
+<section layout:fragment="content" class="container mt-3"><h1>Place Your Order</h1>
+    <form th:action="@{/order/submit}" method="post">
+        <div class="mb-3">
+            <label for="customerName" class="form-label">Your Name:</label>
+            <input type="text" id="customerName"
+                   name="customerName"
+                   class="form-control"
+                   required>
+        </div>
+        <div class="mb-3">
+            <label for="shippingAddress" class="form-label">Shipping Address:</label>
+            <textarea id="shippingAddress" name="shippingAddress" class="form-control" rows="3" required></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="phoneNumber" class="form-label">Phone Number:</label>
+            <input type="tel" id="phoneNumber" name="phoneNumber" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Email Address:</label>
+            <input type="email" id="email" name="email" class="form-control">
+        </div>
+        <div class="mb-3">
+            <label for="orderNote" class="form-label">Order Note (Optional):</label>
+            <textarea id="orderNote" name="orderNote" class="form-control" rows="3"></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="paymentMethod" class="form-label">Payment Method:</label>
+            <select id="paymentMethod" name="paymentMethod" class="form-control">
+                <option value="cod">Cash on Delivery</option>
+                <option value="online">Online Payment</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit Order</button>
+    </form>
+</section>
+</body>
+</html>
+<!--Thêm các thông tin bổ sung cho đơn đặt hàng như địa chỉ giao hàng, số điện thoại, email, ghi chú, phương thức thanh toán.-->

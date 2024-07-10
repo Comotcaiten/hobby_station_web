@@ -1,0 +1,130 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body {
+    background-color: #F5F5FA;
+}
+
+img {
+    width: 100%;
+}
+
+section {
+    background-color: #FFFF;
+    /* border: 1px solid; */
+    border-radius: 5px;
+    margin-bottom: 10px;
+    border-radius: 15px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
+}
+.title {
+    margin: 0;
+    margin-top: 10px;
+}
+.layout-split {
+    display: flex;
+    flex-direction: row;
+}
+
+.layout {
+    margin: 0;
+    margin-top: 12px;
+}
+
+.layout-left {
+    width: 400px;
+    max-height: 100vh;
+    position: sticky;
+    overflow-y: scroll;
+    scrollbar-width: none;
+    top: 16px;
+    background-color: transparent;
+    display: flex;
+    /* padding-bottom: 117px; */
+    flex-direction: column;
+    font-size: 14px;
+    line-height: 20px;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+
+    margin-left: 12px;
+}
+
+.layout-right {
+    width: calc(100% - 254px);
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.left-section > * {
+    margin: 0px 10px 10px 10px;
+}
+.left-a {
+    font-size: 24px;
+}
+.left-img-logo{
+    margin-bottom: 20px;
+    margin-top: 10px;
+}
+
+
+.list-group-brand {
+    padding: 0;
+}
+.list-group-brand > li {
+    margin-bottom: 10px;
+}
+.logo-brand {
+    width: 18%;
+}
+.name-brand {
+    width: 80%;
+    align-content: center;
+    margin-left: 4px;
+    font-size: 18px;
+}
+
+
+.card-img-top{
+    border-radius: 20px;
+    padding: 10px;
+    max-width: 560px;
+}
+.card{
+    border-radius: 20px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+.card-body{
+    padding: 10px   ;
+    margin-top: auto;
+}
+.card-title {
+    margin: auto;
+}
+.btn-primary{
+    border-radius: 50px;
+    max-width: 120px;
+}
+.btn-primary:hover{
+    background-color: black;
+    border: none;
+}
+.card-profile{
+    margin: auto;
+}
+.card-name-product {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2; /* Limit to 2 lines */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal; /* Allow wrapping */
+}
+.card-profile > h3 {
+    margin: auto;
+}
