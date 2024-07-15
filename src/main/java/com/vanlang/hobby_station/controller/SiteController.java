@@ -1,6 +1,5 @@
 package com.vanlang.hobby_station.controller;
 
-import com.vanlang.hobby_station.service.CategoryService;
 import com.vanlang.hobby_station.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,11 +9,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 
 @Controller
-@RequestMapping("/")
+@RequestMapping
 public class SiteController {
+    @Autowired
+    private ProductService productService;
 
     @GetMapping
-    public String home(){
-        return "index";
+    public String home(Model model){
+        model.addAttribute("products", productService.getProductsByIsDeleted(false));
+        model.addAttribute("content", "/site/index");
+        return "layout";
     }
 }

@@ -1,7 +1,6 @@
 package com.vanlang.hobby_station.service;
 
 import com.vanlang.hobby_station.model.Category;
-import com.vanlang.hobby_station.model.Product;
 import com.vanlang.hobby_station.repository.CategoryRepository;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;

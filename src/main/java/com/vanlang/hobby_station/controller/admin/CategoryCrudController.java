@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/admin/dashboard/categories")
+@RequestMapping("/admin/categories")
 public class CategoryCrudController {
     @Autowired
     private final CategoryService categoryService;
@@ -24,16 +24,20 @@ public class CategoryCrudController {
     @GetMapping("/add")
     public String showAddForm(Model model) {
         model.addAttribute("category", new Category());
-        return "/categories/add-category";
+        
+        model.addAttribute("content", "/categories/add-category");
+        return "dashboard-layout";
     }
 
     @PostMapping("/add")
     public String addCategory(@Valid Category category, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
-            return "/categories/add-category";
+
+            model.addAttribute("content", "/categories/add-category");
+            return "dashboard-layout";
         }
         categoryService.addCategory(category);
-        return "redirect:/admin/dashboard/categories";
+        return "redirect:/admin/categories";
     }
 
     // Hiển thị danh sách danh mục
@@ -42,7 +46,9 @@ public class CategoryCrudController {
         List<Category> categories = categoryService.getAllCategories();
         model.addAttribute("categories", categories);
         model.addAttribute("opt",new String("categories"));
-        return "/categories/categories-list";
+
+        model.addAttribute("content", "/categories/categories-list");
+        return "dashboard-layout";
     }
 
     @GetMapping ("/trash-can")
@@ -50,7 +56,9 @@ public class CategoryCrudController {
         List<Category> categories = categoryService.getAllCategories();
         model.addAttribute("categories", categories);
         model.addAttribute("opt",new String("categories"));
-        return "/categories/trash-can-categories";
+
+        model.addAttribute("content", "/categories/trash-can-categories");
+        return "dashboard-layout";
     }
 
     // GET request to show category edit form
@@ -58,7 +66,9 @@ public class CategoryCrudController {
     public String showUpdateForm(@PathVariable("id") Long id, Model model) {
         Category category = categoryService.getCategoryById(id).orElseThrow(() -> new IllegalArgumentException("Invalid category Id:" + id));
         model.addAttribute("category", category);
-        return "/categories/update-category";
+
+        model.addAttribute("content", "/categories/update-category");
+        return "dashboard-layout";
     }
 
     // POST request to update category
@@ -66,11 +76,13 @@ public class CategoryCrudController {
     public String updateCategory(@PathVariable("id") Long id, @Valid Category category, BindingResult result, Model model) {
         if (result.hasErrors()) {
             category.setId(id);
-            return "/categories/update-category";
+            
+            model.addAttribute("content", "/categories/update-category");
+            return "dashboard-layout";
         }
         categoryService.updateCategory(category);
         model.addAttribute("categories", categoryService.getAllCategories());
-        return "redirect:/admin/dashboard/categories";
+        return "redirect:/admin/categories";
     }
 
 //    // GET request for deleting category

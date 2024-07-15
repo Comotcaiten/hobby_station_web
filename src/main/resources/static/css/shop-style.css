@@ -1,0 +1,174 @@
+/* styles2.css */
+
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  header img.banner {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  
+  nav {
+    background-color: #333;
+  }
+  
+  ul.navigate {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+  }
+  
+  ul.navigate li {
+    float: left;
+  }
+  
+  ul.navigate li a {
+    display: block;
+    color: #fff;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+  
+  ul.navigate li a:hover {
+    background-color: #111;
+  }
+  
+  .main-content {
+    display: flex;
+    padding: 20px;
+  }
+  
+  aside {
+    background-color: #f4f4f4;
+    padding: 20px;
+    width: 250px;
+  }
+  
+  #sidebar {
+    width: 250px;
+  }
+  
+  h1.SP {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
+  .menu ul.list-link {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .menu ul.list-link li {
+    margin-bottom: 10px;
+  }
+  
+  .menu ul.list-link li a {
+    text-decoration: none;
+    display: block;
+    padding: 10px;
+    color: #333;
+    background: #eee;
+    border-radius: 5px;
+  }
+  
+  .menu ul.list-link li a:hover {
+    background-color: #ddd;
+  }
+  
+  .content {
+    flex: 1;
+    margin-left: 20px;
+  }
+  
+  h2.SPNB, h2.SPBC {
+    margin: 20px 0 10px;
+    font-size: 24px;
+  }
+  
+  .sanpham {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+  }
+  
+  .product-item {
+    background: #fff;
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+    margin: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .product-item img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .giatien {
+    color: #d9534f;
+    font-weight: bold;
+  }
+  
+  .stars {
+    margin: 10px 0;
+  }
+  
+  .stars form {
+    display: inline-block;
+  }
+  
+  .star {
+    display: none;
+  }
+  
+  .star + label {
+    font-size: 20px;
+    color: #ddd;
+    cursor: pointer;
+  }
+  
+  .star:checked + label {
+    color: #f5c518;
+  }
+  
+  .buttom-buy {
+    background-color: #28a745;
+    color: #fff;
+    padding: 10px;
+    margin-top: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    display: inline-block;
+  }
+  
+  .buttom-buy:hover {
+    background-color: #218838;
+  }
+  
+  .line1 {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .info, .contact-us {
+    margin: 0;
+  }
+  
+  .line2 {
+    height: 3px;
+    background-color: #fff;
+    margin: 10px auto;
+    width: 50px;
+  }
+  

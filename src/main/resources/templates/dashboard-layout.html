@@ -11,7 +11,6 @@
     <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/blog/">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-
     <style>
         .bi {
           display: inline-block;
@@ -148,7 +147,7 @@
 
     <!-- Custom styles for this template -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.min.css" rel="stylesheet">
-    <layout:fragment name="head"></layout:fragment>
+    <!-- <layout:fragment name="head"></layout:fragment> -->
 </head>
 <body>
 
@@ -190,13 +189,13 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link d-flex align-items-center gap-2" href="/admin/dashboard/products">
+                                <a class="nav-link d-flex align-items-center gap-2" href="/admin/products">
                                     <i class="bi bi-box-seam-fill"></i>
                                     Products
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link d-flex align-items-center gap-2" href="/admin/dashboard/categories">
+                                <a class="nav-link d-flex align-items-center gap-2" href="/admin/categories">
                                     <i class="bi bi-tags"></i>
                                     Categories
                                 </a>
@@ -211,13 +210,13 @@
                         </h6>
                         <ul class="nav flex-column mb-auto">
                             <li class="nav-item" th:if = ${!#strings.isEmpty(opt)}>
-                                <a class="nav-link d-flex align-items-center gap-2" th:href="@{'/admin/dashboard/' + ${opt} + '/trash-can'}">
+                                <a class="nav-link d-flex align-items-center gap-2" th:href="@{'/admin/' + ${opt} + '/trash-can'}">
                                     <i class="bi bi-trash"></i>
                                     Thùng rác
                                 </a>
                             </li>
                             <li class="nav-item" th:if = ${!#strings.isEmpty(opt)}>
-                                <a class="nav-link d-flex align-items-center gap-2" th:href="@{'/admin/dashboard/' + ${opt} + '/add'}">
+                                <a class="nav-link d-flex align-items-center gap-2" th:href="@{'/admin/' + ${opt} + '/add'}">
                                     <i class="bi bi-file-earmark-plus-fill"></i>
                                     Tạo mới
                                 </a>
@@ -247,7 +246,7 @@
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                     <h1 class="h2">Dashboard</h1>
                 </div>
-                <section layout:fragment="content">
+                <section th:replace="${content}">
                     <!-- Nội dung cụ thể của từng trang sẽ được đặt tại đây -->
                 </section>
             </main>

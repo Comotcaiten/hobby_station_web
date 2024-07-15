@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/admin/dashboard/products")
+@RequestMapping("/admin/products")
 public class ProductsCrudController {
     @Autowired
     private ProductService productService;
@@ -25,72 +25,86 @@ public class ProductsCrudController {
     @GetMapping
     public String showProducts(Model model) {
         model.addAttribute("products",productService.getProductsByIsDeleted(false));
+        
         model.addAttribute("opt", new String("products"));
-        return "/products/products-list";
+        model.addAttribute("content", "/products/products-list");
+        return "dashboard-layout";
     }
 
-    //
+    // Display a list of all products is soft delete
     @GetMapping("/trash-can")
     public String trashCanProducts(Model model)
     {
         model.addAttribute("products",productService.getProductsByIsDeleted(true));
+        
         model.addAttribute("opt", new String("products"));
-        return "/products/trash-can-products";
+        model.addAttribute("content", "/products/trash-can-products");
+        return "dashboard-layout";
     }
 
     // For adding a new product
     @GetMapping("/add")
     public String showAddForm(Model model) {
         model.addAttribute("product", new Product());
+        
         model.addAttribute("categories",categoryService.getAllCategories());// Load categories
-        return "/products/add-product";
+        model.addAttribute("content", "/products/add-product");
+        return "dashboard-layout";
     }
+
     // Process the form for adding a new product
     @PostMapping("/add")
-    public String addProduct(@Valid Product product, BindingResult bindingResult) {
+    public String addProduct(@Valid Product product, BindingResult bindingResult, Model model) {
         if(bindingResult.hasErrors()){
-            return "products/add-product";
+            
+            model.addAttribute("content", "/products/add-product");
+            return "dashboard-layout";
         }
         productService.addProduct(product);
-        return "redirect:/admin/dashboard/products";
+        return "redirect:/admin/products";
     }
     // For editing a product
     @GetMapping("/edit/{id}")
     public String showEditForm(@PathVariable("id") Long id, Model model) {
         Product product = productService.getProductById(id).orElseThrow(() -> new IllegalArgumentException("Invalid product Id:" + id));
         model.addAttribute("product", product);
+        
         model.addAttribute("categories",categoryService.getAllCategories());//Load categories
-        return "/products/update-product";
+        model.addAttribute("content", "/products/update-product");
+        return "dashboard-layout";
     }
+
     // Process the form for updating a product
     @PostMapping("/update/{id}")
-    public String updateProduct(@PathVariable("id") Long id, @Valid Product product, BindingResult bindingResult) {
+    public String updateProduct(@PathVariable("id") Long id, @Valid Product product, BindingResult bindingResult, Model model) {
         if(bindingResult.hasErrors()){
             product.setId(id);//// set id to keep it in the form in case of errors
-            return "/products/update-product";
+
+            model.addAttribute("content", "/products/update-product");
+            return "dashboard-layout";
         }
         productService.updateProduct(product);
-        return "redirect:/admin/dashboard/products";
+        return "redirect:/admin/products";
     }
 
     // Handle request to soft delete a product
     @GetMapping("/delete/{id}")
     public String deleteProduct(@PathVariable("id") Long id) {
         productService.deleteProductById(id);
-        return "redirect:/admin/dashboard/products";
+        return "redirect:/admin/products";
     }
 
     // Handle request to delete a product
     @GetMapping("/destroy/{id}")
     public String destroyProducts(@PathVariable("id") Long id) {
         productService.destroyProductById(id);
-        return "redirect:/admin/dashboard/products/trash-can";
+        return "redirect:/admin/products/trash-can";
     }
 
     //
     @GetMapping("/restore/{id}")
     public String restoreProducts(@PathVariable("id") Long id) {
         productService.restoreProductById(id);
-        return "redirect:/admin/dashboard/products/trash-can";
+        return "redirect:/admin/products/trash-can";
     }
 }

@@ -2,7 +2,6 @@ package com.vanlang.hobby_station.controller.api;
 
 
 import com.vanlang.hobby_station.model.Category;
-import com.vanlang.hobby_station.model.Product;
 import com.vanlang.hobby_station.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

@@ -1,13 +1,5 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security5"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{dashboard-layout}">
-<head>
-    <title th:text="${title} ?: 'Products List Trash'">Thùng rác</title>
-    <layout:fragment name="head"></layout:fragment>
-</head>
-<body>
-<section layout:fragment="content"><h1>Products List</h1>
+<section layout:fragment="content">
+    <h1>Products-Trash List</h1>
     <table class="table table-bordered table-hover">
         <thead class="table-dark">
         <tr>
@@ -17,7 +9,6 @@
             <th>Description</th>
             <th>Category Name</th>
             <th>Actions</th>
-            <th>Add To Cart</th>
         </tr>
         </thead>
         <tbody>
@@ -39,5 +30,3 @@
         </tbody>
     </table>
 </section>
-</body>
-</html>

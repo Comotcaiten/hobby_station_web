@@ -6,6 +6,7 @@ import com.vanlang.hobby_station.model.OrderDetail;
 import com.vanlang.hobby_station.repository.OrderDetailRepository;
 import com.vanlang.hobby_station.repository.OrderRepository;
 import lombok.RequiredArgsConstructor;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -43,5 +44,9 @@ public class OrderService {
         // Optionally clear the cart after order placement
         cartService.clearCard();
         return order;
+    }
+
+    public List<Order> getAllOrders(){
+        return orderRepository.findAll();
     }
 }

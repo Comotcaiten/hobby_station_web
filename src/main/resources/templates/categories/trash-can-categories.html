@@ -1,15 +1,6 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security5"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{dashboard-layout}">
-<head>
-    <title th:text="${title} ?: 'ategories List Trash Can'"> ategories List Trash Can</title>
-    <layout:fragment name="head"></layout:fragment>
-</head>
-<body>
 <section layout:fragment="content">
     <h1>Categories List Trash Can</h1>
-    <div><a th:href="@{/admin/dashboard/categories/add}" class="btn btn-primary mb-3">Add New Category</a></div>
+    <div><a th:href="@{/admin/categories/add}" class="btn btn-primary mb-3">Add New Category</a></div>
     <table class="table table-bordered table-hover">
         <thead class="table-dark">
         <tr>
@@ -22,12 +13,10 @@
         <tr th:each="category : ${categories}">
             <td th:text="${category.id}"></td>
             <td th:text="${category.name}"></td>
-            <td><a th:href="@{/admin/dashboard/categories/restore/{id}(id=${category.id})}" class="btn btn-success btn-sm">Restore</a> <a
-                    th:href="@{/admin/dashboard/categories/destroy/{id}(id=${category.id})}" class="btn btn-danger btn-sm"
+            <td><a th:href="@{/admin/categories/restore/{id}(id=${category.id})}" class="btn btn-success btn-sm">Restore</a> <a
+                    th:href="@{/admin/categories/destroy/{id}(id=${category.id})}" class="btn btn-danger btn-sm"
                     onclick="return confirm('Are you sure?')">Delete</a></td>
         </tr>
         </tbody>
     </table>
 </section>
-</body>
-</html>

@@ -1,24 +1,23 @@
 package com.vanlang.hobby_station.controller.admin;
 
 
-import com.vanlang.hobby_station.service.CategoryService;
-import com.vanlang.hobby_station.service.ProductService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/admin/dashboard")
+@RequestMapping("/admin")
 public class DashboardController {
-     @Autowired
-   private ProductService productService;
-    @Autowired
-    private CategoryService categoryService;// Đảm bảo bạn đã inject CategoryService
-
     @GetMapping
-    public String home() {;
-        return "/dashboard/index";
+    public String home(Model model) {
+        model.addAttribute("content", "dashboard/index");
+        return "dashboard-layout";
     }
+
+    @GetMapping("/dashboard")
+    public String reHome() {
+        return "redirect:/admin";
+    }
+    
 }

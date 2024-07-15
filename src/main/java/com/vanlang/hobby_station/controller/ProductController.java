@@ -49,7 +49,7 @@ public class ProductController {
     public String showEditForm(@PathVariable("id") Long id, Model model) {
         Product product = productService.getProductById(id).orElseThrow(() -> new IllegalArgumentException("Invalid product Id:" + id));
         model.addAttribute("product", product);
-        model.addAttribute("categories",productService.getProductsByIsDeleted(false));//Load categories
+        model.addAttribute("categories",categoryService.getAllCategories());//Load categories
         return "/products/update-product";
     }
     // Process the form for updating a product
