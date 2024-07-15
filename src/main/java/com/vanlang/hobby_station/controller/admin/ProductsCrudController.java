@@ -42,7 +42,7 @@ public class ProductsCrudController {
     @GetMapping("/add")
     public String showAddForm(Model model) {
         model.addAttribute("product", new Product());
-        model.addAttribute("categories",categoryService.getAllCategoriesByIsDelete(false));// Load categories
+        model.addAttribute("categories",categoryService.getAllCategories());// Load categories
         return "/products/add-product";
     }
     // Process the form for adding a new product
@@ -59,7 +59,7 @@ public class ProductsCrudController {
     public String showEditForm(@PathVariable("id") Long id, Model model) {
         Product product = productService.getProductById(id).orElseThrow(() -> new IllegalArgumentException("Invalid product Id:" + id));
         model.addAttribute("product", product);
-        model.addAttribute("categories",productService.getProductsByIsDeleted(false));//Load categories
+        model.addAttribute("categories",categoryService.getAllCategories());//Load categories
         return "/products/update-product";
     }
     // Process the form for updating a product

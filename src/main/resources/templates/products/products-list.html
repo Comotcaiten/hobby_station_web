@@ -28,15 +28,14 @@
             <td th:text="${product.description}"></td>
             <td th:text="${product.category.name}"></td>
             <td> <!-- Hiển thị nút sửa và xóa chỉ dành cho người dùng ADMIN -->
-                <div>
-<!--                    sec:authorize="hasAuthority('ADMIN')"-->
-                    <a th:href="@{/admin/dashboard/products/edit/{id}(id=${product.id})}" class="btn btn-success btn-sm">Sửa</a>
+                <div sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/admin/dashboard/products/edit/{id}(id=${product.id})}"
+                                                              class="btn btn-success btn-sm">Sửa</a>
                     <a th:href="@{/admin/dashboard/products/delete/{id}(id=${product.id})}" class="btn btn-danger btn-sm"
                        onclick="return confirm('Bạn có chắc không?')">Xóa</a>
                 </div>
             </td>
-            <td> <!-- Nút thêm vào giỏ hàng, hiển thị cho tất cả người dùng đã xác thực sec:authorize="isAuthenticated()" trong form -->
-                <form th:action="@{/cart/add}" method="post" >
+            <td> <!-- Nút thêm vào giỏ hàng, hiển thị cho tất cả người dùng đã xác thực -->
+                <form th:action="@{/cart/add}" method="post" sec:authorize="isAuthenticated()">
                     <input type="number" name="quantity"
                            min="1" value="1"
                            class="form-control d-inline-block"

@@ -63,13 +63,13 @@ public class CategoryController {
         return "redirect:/categories";
     }
     
-    // GET request for deleting category
-    @GetMapping("/categories/delete/{id}")
-    public String deleteCategory(@PathVariable("id") Long id, Model model) {
-        Category category = categoryService.getCategoryById(id).orElseThrow(() -> new IllegalArgumentException("Invalid category Id:" + id));
-        categoryService.deleteCategory(id);
-        model.addAttribute("categories", categoryService.getAllCategories());
-        return "redirect:/categories";
-    }
+//    // GET request for deleting category
+//    @GetMapping("/categories/delete/{id}")
+//    public String deleteCategory(@PathVariable("id") Long id, Model model) {
+//        Category category = categoryService.getCategoryById(id).orElseThrow(() -> new IllegalArgumentException("Invalid category Id:" + id));
+//        categoryService.deleteCategory(id);
+//        model.addAttribute("categories", categoryService.getAllCategories());
+//        return "redirect:/categories";
+//    }
     
 }

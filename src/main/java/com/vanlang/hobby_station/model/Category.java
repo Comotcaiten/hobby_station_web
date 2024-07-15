@@ -21,6 +21,4 @@ public class Category {
 
     @NotBlank(message = "Tên là bắt buộc")
     private String name;
-
-    private Boolean isDeleted = false; // dữ liệu mặc định của soft delete là false
 }

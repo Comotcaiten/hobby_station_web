@@ -24,10 +24,10 @@ public class CategoryService {
     public List<Category> getAllCategories() {
         return categoryRepository.findAll();
     }
-    public List<Category> getAllCategoriesByIsDelete(boolean isDelete)
-    {
-        return categoryRepository.findByIsDeleted(isDelete);
-    }
+//    public List<Category> getAllCategoriesByIsDelete(boolean isDelete)
+//    {
+//        return categoryRepository.findByIsDeleted(isDelete);
+//    }
     /**
      * Retrieve a category by its id.
      * @param id the id of the category to retrieve
@@ -37,8 +37,8 @@ public class CategoryService {
         return categoryRepository.findById(id);
     }
     /** * Add a new category to the database. * @param category the category to add */
-    public void addCategory(Category category) {
-        categoryRepository.save(category);
+    public Category addCategory(Category category) {
+        return categoryRepository.save(category);
     }
     /** * Update an existing category. * @param category the category with updated information */
     public void updateCategory(@NonNull Category category) {
@@ -54,19 +54,19 @@ public class CategoryService {
         categoryRepository.deleteById(id);
     }
 
-    // Soft delete a product by its id
-    public void deleteCategory(Long id) {
-        Category category = categoryRepository.findById(id)
-                .orElseThrow(() -> new IllegalStateException("Category with ID " + id + " does not exist."));
-        category.setIsDeleted(true);
-        categoryRepository.save(category);
-    }
-
-    // Restore a soft deleted product by its id
-    public void restoreCategory(Long id) {
-        Category category = categoryRepository.findById(id)
-                .orElseThrow(() -> new IllegalStateException("Category with ID " + id + " does not exist."));
-        category.setIsDeleted(false);
-        categoryRepository.save(category);
-    }
+//    // Soft delete a product by its id
+//    public void deleteCategory(Long id) {
+//        Category category = categoryRepository.findById(id)
+//                .orElseThrow(() -> new IllegalStateException("Category with ID " + id + " does not exist."));
+//        category.setIsDeleted(true);
+//        categoryRepository.save(category);
+//    }
+//
+//    // Restore a soft deleted product by its id
+//    public void restoreCategory(Long id) {
+//        Category category = categoryRepository.findById(id)
+//                .orElseThrow(() -> new IllegalStateException("Category with ID " + id + " does not exist."));
+//        category.setIsDeleted(false);
+//        categoryRepository.save(category);
+//    }
 }
