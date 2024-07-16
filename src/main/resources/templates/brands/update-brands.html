@@ -1,0 +1,30 @@
+<section layout:fragment="content" class="container mt-5">
+  <h1 class="mb-4">Update Brand</h1>
+  <form
+    th:action="@{/admin/brands/update/{id}(id=${brand.id})}"
+    th:object="${brand}"
+    method="post"
+    class="needs-validation"
+    novalidate
+  >
+    <div class="mb-3">
+      <label for="name" class="form-label">Brand Name:</label>
+      <input
+        type="text"
+        th:field="*{name}"
+        class="form-control"
+        id="name"
+        required
+      />
+      <div
+        class="invalid-feedback"
+        th:if="${#fields.hasErrors('name')}"
+        th:errors="*{name}"
+      >
+        Valid name is required.
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Update</button>
+    <a th:href="@{/admin/brands}" class="btn btn-link">Cancel</a>
+  </form>
+</section>

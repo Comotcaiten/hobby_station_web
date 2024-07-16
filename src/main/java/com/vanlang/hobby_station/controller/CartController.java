@@ -17,7 +17,7 @@ public class CartController {
         model.addAttribute("cartItems", cartService.getCartItems());
 
         model.addAttribute("content", "/cart/cart");
-        return "dashboard-layout";
+        return "layout";
     }
     @PostMapping("/add")
     public String addToCart(@RequestParam Long productId, @RequestParam int quantity) {

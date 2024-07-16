@@ -20,4 +20,11 @@ public class SiteController {
         model.addAttribute("content", "/site/index");
         return "layout";
     }
+
+    @GetMapping ("/shop")
+    public String shop(Model model){
+        model.addAttribute("products", productService.getProductsByIsDeleted(false));
+        model.addAttribute("content", "/site/shop");
+        return "layout";
+    }
 }

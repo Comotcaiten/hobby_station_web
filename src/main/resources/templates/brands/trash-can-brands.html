@@ -1,0 +1,22 @@
+<section layout:fragment="content">
+    <h1>brands List Trash Can</h1>
+    <div><a th:href="@{/admin/brands/add}" class="btn btn-primary mb-3">Add New Brand</a></div>
+    <table class="table table-bordered table-hover">
+        <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="brand : ${brands}">
+            <td th:text="${brand.id}"></td>
+            <td th:text="${brand.name}"></td>
+            <td><a th:href="@{/admin/brands/restore/{id}(id=${brand.id})}" class="btn btn-success btn-sm">Restore</a> <a
+                    th:href="@{/admin/brands/destroy/{id}(id=${brand.id})}" class="btn btn-danger btn-sm"
+                    onclick="return confirm('Are you sure?')">Delete</a></td>
+        </tr>
+        </tbody>
+    </table>
+</section>

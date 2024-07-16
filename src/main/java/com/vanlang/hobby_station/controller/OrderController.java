@@ -22,8 +22,9 @@ public class OrderController {
     private CartService cartService;
 
     @GetMapping("/checkout")
-    public String checkout() {
-        return "cart/checkout";
+    public String checkout(Model model) {
+        model.addAttribute("content", "cart/checkout");
+        return "layout";
     }
 
     @PostMapping("/submit")
@@ -45,6 +46,8 @@ public class OrderController {
     @GetMapping("/confirmation")
     public String orderConfirmation(Model model) {
         model.addAttribute("message", "Your order has been successfully placed.");
-        return "cart/order-confirmation";
+
+        model.addAttribute("content", "cart/order-confirmation");
+        return "layout";
     }
 }

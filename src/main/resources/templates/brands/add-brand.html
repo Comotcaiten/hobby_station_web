@@ -1,0 +1,11 @@
+<section layout:fragment="content" class="container mt-5">
+    <h1 class="mb-4">Form Brand</h1>
+    <form th:action="@{/admin/brands/add}" th:object="${brand}" method="post">
+        <div class="mb-3">
+            <label for="name" class="form-label">Brand Name:</label>
+            <input type="text" id="name" th:field="*{name}" class="form-control"/>
+            <div class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</section>

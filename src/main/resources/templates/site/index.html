@@ -5,10 +5,14 @@
         <h2>Sản phẩm nổi bật</h2>
         <div class="product-items">
             <div class="product-item" th:each="product : ${products}">
-                <img src="https://th.bing.com/th/id/OIP.Mz7deVo3t1STrqXqyppUBAHaHa?w=174&h=180&c=7&r=0&o=5&dpr=1.4&pid=1.7">
-                <h3 th:text="${product.name}">Tên sản phẩm</h3>
+                <img th:src="${product.img}">
+                <h6 class="card-name-product" th:text="${product.name}" th:title="${product.name}">Tên sản phẩm</h6>
                 <p class="price" th:text="${#numbers.formatDecimal(product.price, 1, 'COMMA', 2, 'POINT')}">149,000 VNĐ</p>
-                <a href="#" class="btn">Mua ngay</a>
+                <form th:action="@{/cart/add}" method="post" sec:authorize="isAuthenticated()">
+                    <input type="hidden" name="quantity" min="1" value="1">
+                    <input type="hidden" th:value="${product.id}" name="productId"/>
+                    <button type="submit" class="btn btn-warning btn-sm">Thêm Vào Giỏ</button>
+                </form>
             </div>
         </div>
     </div>

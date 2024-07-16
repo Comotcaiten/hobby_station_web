@@ -48,6 +48,12 @@ public class ProductApiController {
     public ResponseEntity<Void> deleteProduct(@PathVariable Long id) {
         Product product = productService.getProductById(id).orElseThrow(() -> new RuntimeException("Product not found on :: "
                 + id));
+        try {
+            product.getId();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
         productService.deleteProductById(id);
         return ResponseEntity.ok().build();
     }

@@ -7,6 +7,7 @@
             <th>Price</th>
             <th>Description</th>
             <th>Category Name</th>
+            <th>Brand Name</th>
             <th>Actions</th>
             <th>Add To Cart</th>
         </tr>
@@ -18,6 +19,7 @@
             <td th:text="${#numbers.formatDecimal(product.price, 1, 'COMMA', 2, 'POINT')}"></td>
             <td th:text="${product.description}"></td>
             <td th:text="${product.category.name}"></td>
+            <td th:text="${product.brand.name}"></td>
             <td> <!-- Hiển thị nút sửa và xóa chỉ dành cho người dùng ADMIN -->
                 <div sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/admin/products/edit/{id}(id=${product.id})}"
                                                               class="btn btn-success btn-sm">Sửa</a>

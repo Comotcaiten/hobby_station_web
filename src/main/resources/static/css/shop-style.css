@@ -98,47 +98,71 @@ body {
     justify-content: space-around;
     flex-wrap: wrap;
   }
-  
-  .product-item {
-    background: #fff;
-    border: 1px solid #ddd;
-    padding: 10px;
+  .products {
+    background-color: #fff;
+    padding: 50px 0;
     text-align: center;
-    margin: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  }
-  
-  .product-item img {
-    max-width: 100%;
+}
+
+.product-items {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.product-item {
+    width: 300px;
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-align: left;
+    background-color: #f9f9f9;
+}
+
+.product-item img {
+    width: 100%;
     height: auto;
-  }
-  
+    border-radius: 5px;
+}
+
+.product-item h3 {
+    margin-top: 10px;
+    font-size: 20px;
+}
+
+.product-item .price {
+    color: #f44336;
+    font-weight: bold;
+}
+
+.product-item .btn {
+    display: inline-block;
+    background-color: #4CAF50;
+    color: #fff;
+    padding: 8px 16px;
+    text-decoration: none;
+    border-radius: 3px;
+    transition: background-color 0.3s ease;
+}
+.card-name-product {
+  margin-top: 10px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal; /* Allow wrapping */
+}
+
+
+.product-item .btn:hover {
+    background-color: #45a049;
+}
   .giatien {
     color: #d9534f;
     font-weight: bold;
   }
   
-  .stars {
-    margin: 10px 0;
-  }
-  
-  .stars form {
-    display: inline-block;
-  }
-  
-  .star {
-    display: none;
-  }
-  
-  .star + label {
-    font-size: 20px;
-    color: #ddd;
-    cursor: pointer;
-  }
-  
-  .star:checked + label {
-    color: #f5c518;
-  }
   
   .buttom-buy {
     background-color: #28a745;

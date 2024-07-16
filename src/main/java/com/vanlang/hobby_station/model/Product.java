@@ -16,9 +16,14 @@ public class Product {
     private String name;
     private double price;
     private String description;
+    private String img;
     private Boolean isDeleted = false; // dữ liệu mặc định của soft delete là false
 
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
+
+    @ManyToOne
+    @JoinColumn(name = "brand_id")
+    private Brand brand;
 }

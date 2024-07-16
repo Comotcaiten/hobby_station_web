@@ -1,6 +1,7 @@
 package com.vanlang.hobby_station.controller.admin;
 
 import com.vanlang.hobby_station.model.Product;
+import com.vanlang.hobby_station.service.BrandService;
 import com.vanlang.hobby_station.service.CategoryService;
 import com.vanlang.hobby_station.service.ProductService;
 import jakarta.validation.Valid;
@@ -20,6 +21,8 @@ public class ProductsCrudController {
     private ProductService productService;
     @Autowired
     private CategoryService categoryService;// Đảm bảo bạn đã inject CategoryService
+    @Autowired
+    private BrandService brandService;
 
     // Display a list of all products
     @GetMapping
@@ -48,6 +51,8 @@ public class ProductsCrudController {
         model.addAttribute("product", new Product());
         
         model.addAttribute("categories",categoryService.getAllCategories());// Load categories
+        model.addAttribute("brands", brandService.getAllBrands());
+
         model.addAttribute("content", "/products/add-product");
         return "dashboard-layout";
     }
@@ -55,6 +60,8 @@ public class ProductsCrudController {
     // Process the form for adding a new product
     @PostMapping("/add")
     public String addProduct(@Valid Product product, BindingResult bindingResult, Model model) {
+        System.out.println("ADD POST");
+        System.out.println(product.getImg());
         if(bindingResult.hasErrors()){
             
             model.addAttribute("content", "/products/add-product");
@@ -70,6 +77,8 @@ public class ProductsCrudController {
         model.addAttribute("product", product);
         
         model.addAttribute("categories",categoryService.getAllCategories());//Load categories
+        model.addAttribute("brands", brandService.getAllBrands());
+
         model.addAttribute("content", "/products/update-product");
         return "dashboard-layout";
     }
