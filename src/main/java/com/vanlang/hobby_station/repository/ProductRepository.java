@@ -15,12 +15,18 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     Optional<Product> findByIdAndIsDeleted(Long id, boolean isDeleted);
 
+    // Name
+    List<Product> findByNameContaining(String name);
+
+    // Brand
     List<Product> findByBrandId(Long brandId);
     List<Product> findByBrandIdAndIsDeleted(Long brandId, boolean isDeleted);
 
+    // Category
     List<Product> findByCategoryId(Long categoryId);
     List<Product> findByCategoryIdAndIsDeleted(Long categoryId, boolean isDeleted);
     
+    // Price
     List<Product> findByPriceGreaterThan(Double price);
     List<Product> findByPriceLessThan(Double price);
     List<Product> findByPriceEquals(Double price);

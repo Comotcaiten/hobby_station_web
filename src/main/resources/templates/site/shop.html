@@ -1,18 +1,25 @@
 <section class="container mb-4">
     <link rel="stylesheet" href="/css/shop-style.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/script/shop.js"></script>
   <main>
     <div class="main-content">
       <aside id="sidebar">
         <div class="menu">
           <h1 class="SP">SẢN PHẨM</h1>
           <ul class="list-link">
+            <li>
+              <a href="#"
+                th:text="All"
+                th:onclick="'loadProductsByCategory(); return false;'">
+              </a>
+            </li>
             <li th:each="category : ${categories}">
-              <a
-                href="#"
+              <a href="#"
                 th:text="${category.name}"
                 th:data-category-id="${category.id}"
-              ></a>
+                th:attr="data-id=${category.id}"
+                th:onclick="'loadProductsByCategory(' + ${category.id} + '); return false;'">
+              </a>
             </li>
           </ul>
         </div>
@@ -20,26 +27,7 @@
       <div class="content">
         <section class="product-featured">
           <h2 class="SPNB">SẢN PHẨM MỚI NHẤT</h2>
-          <div class="sanpham">
-            <div class="product-item col-6 col-sm-4" style="width: 18rem;" th:each="product : ${products}">
-              <img th:src="${product.img}" class="card-img-top" th:alt="${product.name}" th:title="${product.name}">
-              <div class="card-body">
-                <h5 class="card-title" th:text="${product.name}" th:title="${product.name}">Card title</h5>
-                <p class="card-text" th:text="${#numbers.formatDecimal(product.price, 1, 'COMMA', 2, 'POINT')}">120.00</p>
-                
-                <form th:action="@{/cart/add}" method="post" sec:authorize="isAuthenticated()" class="btn-action">
-                  <input type="hidden" name="quantity" min="1" value="1">
-                  <input type="hidden" th:value="${product.id}" name="productId"/>
-                  
-                  <button type="submit" class="btn btn-warning btn-sm">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-basket-fill" viewBox="0 0 16 16">
-                          <path d="M5.071 1.243a.5.5 0 0 1 .858.514L3.383 6h9.234L10.07 1.757a.5.5 0 1 1 .858-.514L13.783 6H15.5a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5H15v5a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V9H.5a.5.5 0 0 1-.5-.5v-2A.5.5 0 0 1 .5 6h1.717zM3.5 10.5a.5.5 0 1 0-1 0v3a.5.5 0 0 0 1 0zm2.5 0a.5.5 0 1 0-1 0v3a.5.5 0 0 0 1 0zm2.5 0a.5.5 0 1 0-1 0v3a.5.5 0 0 0 1 0zm2.5 0a.5.5 0 1 0-1 0v3a.5.5 0 0 0 1 0zm2.5 0a.5.5 0 1 0-1 0v3a.5.5 0 0 0 1 0z"/>
-                      </svg>
-                      <span>Thêm Vào Giỏ</span>
-                  </button>
-              </form>
-              </div>
-            </div>
+          <div class="sanpham" id="sanpham">
           </div>
         </section>
       </div>

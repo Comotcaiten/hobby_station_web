@@ -25,6 +25,11 @@ public class ProductService {
         return productRepository.findByIsDeleted(isDeleted);
     }
 
+    // By Name
+    public List<Product> searchProductsByName(String name) {
+        return productRepository.findByNameContaining(name);
+    }
+    
     // Retrieve products by Brand status
     public List<Product> getProductsByBrand(Long brandId) {
         return productRepository.findByBrandId(brandId);
@@ -40,6 +45,9 @@ public class ProductService {
         return productRepository.findByCategoryId(categoryId);
     }
 
+    public List<Product> getProductsByCategoryIdAndIsDeleted(Long categoryId, boolean isDeleted) {
+        return productRepository.findByCategoryIdAndIsDeleted(categoryId, isDeleted);
+    }
 
     // Retrieve products by Price
     // Product.price > Price

@@ -1,18 +1,6 @@
 <section class="h-100 gradient-custom">
   <link rel="stylesheet" href="/css/style.css">
-    <style>
-        .gradient-custom {
-        /* fallback for old browsers */
-        /* background: #6a11cb; */
-
-        /* Chrome 10-25, Safari 5.1-6 */
-        /* background: -webkit-linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1)); */
-
-        /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-        /* background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1)); */
-        border-radius: 10px;
-        }
-    </style>
+  <script src="/script/cart.js"></script>
     <div class="container py-5">
       <div class="row d-flex justify-content-center my-4">
         <div class="col-md-8">
@@ -53,29 +41,14 @@
                 <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
                   <!-- Quantity -->
                   <div class="d-flex mb-4" style="max-width: 300px">
-                    <button data-mdb-button-init data-mdb-ripple-init class="btn btn-primary px-3 me-2"
-                      onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash-lg" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd" d="M2 8a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11A.5.5 0 0 1 2 8"/>
-                      </svg>
-                    </button>
-  
-                    <div data-mdb-input-init class="form-outline">
-                      <input id="form1" min="0" name="quantity" th:value="${item.quantity}" type="number" class="form-control" />
+                    <div data-mdb-input-init class="form-outline" th:attr="data-id=${item.product.id}">
+                      <input id="form1-quantity" min="0" name="quantity" th:value="${item.quantity}" type="number" class="form-control"/>
                       <label class="form-label" for="form1">Quantity</label>
                     </div>
-  
-                    <button data-mdb-button-init data-mdb-ripple-init class="btn btn-primary px-3 ms-2"
-                      onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
-                        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
-                      </svg>
-                    </button>
                   </div>
                   <!-- Quantity -->
-  
                   <!-- Price -->
-                  <p class="text-start text-md-center">
+                  <p class="text-start text-md-center" id="price" th:attr="price=${item.product.price}" th:text="${#numbers.formatDecimal(item.quantity * item.product.price, 0, 'COMMA', 0, 'POINT') + ' đ'}">
                     <strong>$17.99</strong>
                   </p>
                   <!-- Price -->
@@ -139,7 +112,7 @@
               </ul>
 
               <a th:href="@{/cart/clear}" class="btn btn-secondary btn-lg btn-block">Clear Cart</a> |
-              <a th:href="@{/order/checkout}" class="btn btn-primary btn-lg btn-block">Check Out</a>
+              <a href="" class="btn btn-primary btn-lg btn-block" id="check-out">Check Out</a>
             </div>
           </div>
         </div>

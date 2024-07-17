@@ -18,7 +18,7 @@ public class ProductApiController {
 
     @GetMapping
     public List<Product> getAllProducts() {
-        return productService.getAllProducts();
+        return productService.getProductsByIsDeleted(false);
     }
 
     @PostMapping
@@ -59,6 +59,21 @@ public class ProductApiController {
         return ResponseEntity.ok().build();
     }
 
+    // Name - Searching
+    // @GetMapping("/search/{name}")
+    // public List<Product> searchProducts(@PathVariable("name") String name) {
+    //     return productService.searchProductsByName(name);
+    // }
+
+    @GetMapping("/search")
+    public List<Product> searchProducts(@RequestParam(value = "name", required = false) String name) {
+        if (name == null || name.trim().isEmpty()) {
+            return productService.getAllProducts();
+        } else {
+            return productService.searchProductsByName(name);
+        }
+    }
+
     // Brand
 
     @GetMapping("/brands/{id}")
@@ -68,6 +83,9 @@ public class ProductApiController {
 
     @GetMapping("/brands-false/{id}")
     public List<Product> getProductsByBrandAndIsDeletedFalse(@PathVariable Long id) {
+        if (id == null) {
+            return productService.getProductsByIsDeleted(false);
+        }
         return productService.getProductsByBrandAndIsDeleted(id, false);
     }
 
@@ -82,6 +100,12 @@ public class ProductApiController {
     public List<Product> getAllProductsByCategory(@PathVariable Long id) {
         return productService.getProductsByCategory(id);
     }
+
+    @GetMapping("/categories-false/{id}")
+    public List<Product> getAllProductsByCategoryAndIsDeleted(@PathVariable Long id) {
+        return productService.getProductsByCategoryIdAndIsDeleted(id, false);
+    }
+
 
     // Price
 

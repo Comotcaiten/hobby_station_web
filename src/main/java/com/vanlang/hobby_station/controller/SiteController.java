@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-
 @Controller
 @RequestMapping
 public class SiteController {
@@ -46,4 +45,5 @@ public class SiteController {
         model.addAttribute("content", "/site/detail-product");
         return "layout";
     }
+    
 }
