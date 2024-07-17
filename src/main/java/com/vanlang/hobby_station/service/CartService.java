@@ -20,7 +20,20 @@ public class CartService {
 
     public void addToCart(Long productId, int quantity) {
         Product product = productRepository.findById(productId).orElseThrow(() -> new IllegalArgumentException("Product not found: " + productId));
-        cartItems.add(new CartItem(product, quantity));
+
+        // Kiểm tra nếu sản phẩm đã có trong giỏ hàng
+        CartItem existingItem = cartItems.stream()
+                .filter(item -> item.getProduct().getId().equals(productId))
+                .findFirst()
+                .orElse(null);
+        if (existingItem != null) {
+            // Nếu sản phẩm đã tồn tại, tăng số lượng
+            existingItem.setQuantity(existingItem.getQuantity() + quantity);
+        } else {
+            // Nếu sản phẩm chưa tồn tại, thêm sản phẩm mới vào giỏ hàng
+            cartItems.add(new CartItem(product, quantity));
+        }
+        // cartItems.add(new CartItem(product, quantity));
     }
 
     public List<CartItem> getCartItems() {

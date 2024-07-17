@@ -1,6 +1,7 @@
 package com.vanlang.hobby_station.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 
 @Setter
@@ -15,7 +16,10 @@ public class Product {
     private Long id;
     private String name;
     private double price;
+
+    @Size(max = 500, message = "Description must be less than 500 characters")
     private String description;
+
     private String img;
     private Boolean isDeleted = false; // dữ liệu mặc định của soft delete là false
 

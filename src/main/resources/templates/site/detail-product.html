@@ -1,0 +1,52 @@
+<section>
+    <link rel="stylesheet" href="/css/detail-style.css">
+  <main>
+    <div class="card">
+  <div class="card__title">
+    <div class="icon">
+      <a href="#"><i class="fa fa-arrow-left"></i></a>
+    </div>
+    <!-- <h3>New products</h3> -->
+  </div>
+  <div class="card__body">
+    <div class="half">
+      <div class="image">
+        <img th:src="${product.img}" alt="">
+      </div>
+    </div>
+    <div class="half" th:object="${product}">
+      <div class="featured_text">
+        <h3 th:text="${product.name}">Nurton</h3>
+        <p class="sub" th:text="'Hãng: ' + ${product.brand.name}">Office Chair</p>
+        <p class="price" th:text="${product.price} + ' VNĐ'">$210.00</p>
+      </div>
+      <div class="description">
+        <p th:text="${product.description}">This is description</p>
+      </div>
+      <!-- <span class="stock"><i class="fa fa-pen"></i> In stock</span> -->
+      <div class="reviews">
+        <ul class="stars">
+          <li><i class="fa fa-star"></i></li>
+          <li><i class="fa fa-star"></i></li>
+          <li><i class="fa fa-star"></i></li>
+          <li><i class="fa fa-star"></i></li>
+          <li><i class="fa fa-star-o"></i></li>
+        </ul>
+        <!-- <span>(64 reviews)</span> -->
+      </div>
+    </div>
+  </div>
+  <div class="card__footer">
+    <div class="recommend">
+      <p>Recommended by</p>
+      <h3>Andrew Palmer</h3>
+    </div>
+    <form th:action="@{/cart/add}" method="post" sec:authorize="isAuthenticated()" class="action">
+        <input type="hidden" name="quantity" min="1" value="1">
+        <input type="hidden" th:value="${product.id}" name="productId"/>
+        <button type="submit" class="btn btn-warning btn-sm">Thêm Vào Giỏ</button>
+    </form>
+  </div>
+</div>
+  </main>
+</section>

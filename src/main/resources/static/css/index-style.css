@@ -141,10 +141,36 @@ header nav ul li a:hover {
     transition: background-color 0.3s ease;
 }
 
-.btn:hover {
-    background-color: #45a049;
+.btn-action {
+    margin-bottom: 0;
 }
 
+.btn-action{
+    button{
+      cursor: pointer;
+      border: 1px solid #115dd8;
+      padding: 14px 30px;
+      border-radius: 200px;
+      color: #fff;
+      background: #115dd8;
+      font-family: "Open Sans", sans-serif;
+      font-size: 16px;
+      transition: 200ms;
+      
+      &:hover{
+        background: #fff;
+        color: #115dd8;
+      }
+    }
+}
+
+.btn-action svg {
+    margin-right: 5px; /* Khoảng cách giữa biểu tượng và chữ */
+    vertical-align: middle;
+    margin-bottom:5px ;
+    
+}   
+    
 .products {
     background-color: #fff;
     padding: 50px 0;
@@ -183,18 +209,9 @@ header nav ul li a:hover {
     font-weight: bold;
 }
 
-.product-item .btn {
-    display: inline-block;
-    background-color: #4CAF50;
-    color: #fff;
-    padding: 8px 16px;
-    text-decoration: none;
-    border-radius: 3px;
-    transition: background-color 0.3s ease;
-}
-
 .product-item .btn:hover {
-    background-color: #45a049;
+    background-color: hsl(41, 88%, 52%);
+    color: #333;
 }
 
 footer {
@@ -261,4 +278,13 @@ footer .social-icons a {
 
 footer .social-icons a:hover {
     color: #4CAF50;
+}
+
+/* Thay đổi cho màn hình nhỏ hơn */
+@media (max-width: 576px) {
+    .btn-action{
+        button span{
+            display: none;
+        }
+    }
 }

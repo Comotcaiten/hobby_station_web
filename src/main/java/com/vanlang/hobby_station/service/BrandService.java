@@ -26,8 +26,8 @@ public class BrandService {
         return brandRepository.findById(id);
     }
 
-    public void addBrand(Brand brand){
-        brandRepository.save(brand);
+    public Brand addBrand(Brand brand){
+        return brandRepository.save(brand);
     }
 
     public void updateBrand(@NonNull Brand brand){

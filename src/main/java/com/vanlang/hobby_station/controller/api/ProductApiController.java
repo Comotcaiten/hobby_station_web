@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+
 @CrossOrigin
 @RestController
 @RequestMapping("/api/products")
@@ -56,5 +57,46 @@ public class ProductApiController {
         }
         productService.deleteProductById(id);
         return ResponseEntity.ok().build();
+    }
+
+    // Brand
+
+    @GetMapping("/brands/{id}")
+    public List<Product> getAllProductsByBrand(@PathVariable Long id) {
+        return productService.getProductsByBrand(id);
+    }
+
+    @GetMapping("/brands-false/{id}")
+    public List<Product> getProductsByBrandAndIsDeletedFalse(@PathVariable Long id) {
+        return productService.getProductsByBrandAndIsDeleted(id, false);
+    }
+
+    @GetMapping("/brands-true/{id}")
+    public List<Product> getProductsByBrandAndIsDeletedTrue(@PathVariable Long id) {
+        return productService.getProductsByBrandAndIsDeleted(id, true);
+    }
+    
+    // Category
+
+    @GetMapping("/categories/{id}")
+    public List<Product> getAllProductsByCategory(@PathVariable Long id) {
+        return productService.getProductsByCategory(id);
+    }
+
+    // Price
+
+    @GetMapping("/less/{id}")
+    public List<Product> getAllProductsLess(@PathVariable Double id) {
+        return productService.getProductsByPriceLessThan(id);
+    }
+
+    @GetMapping("/greater/{id}")
+    public List<Product> getAllProductsGreater(@PathVariable Double id) {
+        return productService.getProductsByPriceGreaterThan(id);
+    }
+
+    @GetMapping("/equal/{id}")
+    public List<Product> getAllProductsEqual(@PathVariable Double id) {
+        return productService.getProductsByPriceEquals(id);
     }
 }

@@ -21,8 +21,8 @@
             <td> <!-- Hiển thị nút sửa và xóa chỉ dành cho người dùng ADMIN -->
                 <div>
                     <!--                    sec:authorize="hasAuthority('ADMIN')"-->
-                    <a th:href="@{/admin/dashboard/products/restore/{id}(id=${product.id})}" class="btn btn-success btn-sm">Khôi phục</a>
-                    <a th:href="@{/admin/dashboard/products/destroy/{id}(id=${product.id})}" class="btn btn-danger btn-sm"
+                    <a th:href="@{/admin/products/restore/{id}(id=${product.id})}" class="btn btn-success btn-sm">Khôi phục</a>
+                    <a th:href="@{/admin/products/destroy/{id}(id=${product.id})}" class="btn btn-danger btn-sm"
                        onclick="return confirm('Bạn có chắc không?')">Xóa</a>
                 </div>
             </td>

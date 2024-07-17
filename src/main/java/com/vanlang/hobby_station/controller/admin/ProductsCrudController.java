@@ -5,14 +5,13 @@ import com.vanlang.hobby_station.service.BrandService;
 import com.vanlang.hobby_station.service.CategoryService;
 import com.vanlang.hobby_station.service.ProductService;
 import jakarta.validation.Valid;
+    import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/admin/products")
@@ -59,11 +58,19 @@ public class ProductsCrudController {
 
     // Process the form for adding a new product
     @PostMapping("/add")
-    public String addProduct(@Valid Product product, BindingResult bindingResult, Model model) {
-        System.out.println("ADD POST");
-        System.out.println(product.getImg());
+    public String addProduct(@Valid @ModelAttribute("product") Product product, BindingResult bindingResult, Model model) {
+        if (product.getImg().isEmpty() || product.getImg().equalsIgnoreCase(null))
+        {
+            product.setImg("/image/default.png");
+        }
         if(bindingResult.hasErrors()){
             
+            var errors = bindingResult.getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).toArray(String[]::new);
+            model.addAttribute("errors", errors);
+
+            model.addAttribute("categories",categoryService.getAllCategories());// Load categories
+            model.addAttribute("brands", brandService.getAllBrands());
+    
             model.addAttribute("content", "/products/add-product");
             return "dashboard-layout";
         }

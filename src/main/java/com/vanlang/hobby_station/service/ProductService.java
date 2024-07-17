@@ -25,9 +25,56 @@ public class ProductService {
         return productRepository.findByIsDeleted(isDeleted);
     }
 
+    // Retrieve products by Brand status
+    public List<Product> getProductsByBrand(Long brandId) {
+        return productRepository.findByBrandId(brandId);
+    }
+
+    // Retrieve products by isDeleted status and Brand
+    public List<Product> getProductsByBrandAndIsDeleted(Long brandId, Boolean isDeleted) {
+        return productRepository.findByBrandIdAndIsDeleted(brandId, isDeleted);
+    }
+
+    // Retrieve products by Category status
+    public List<Product> getProductsByCategory(Long categoryId) {
+        return productRepository.findByCategoryId(categoryId);
+    }
+
+
+    // Retrieve products by Price
+    // Product.price > Price
+    public List<Product> getProductsByPriceGreaterThan(Double price) {
+        return productRepository.findByPriceGreaterThan(price);
+    }
+
+    // Product.price < Price
+    public List<Product> getProductsByPriceLessThan(Double price) {
+        return productRepository.findByPriceLessThan(price);
+    }
+
+    // Product.price = Price
+    public List<Product> getProductsByPriceEquals(Double price) {
+        return productRepository.findByPriceEquals(price);
+    }
+
     // Retrieve a product by its id
     public Optional<Product> getProductById(Long id) {
         return productRepository.findById(id);
+    }
+
+    public Optional<Product> getProductByIdAndIsDeleted(Long id, boolean isDeleted) {
+        return productRepository.findByIdAndIsDeleted(id, isDeleted);
+    }
+
+    public Product getProductByIdAndIsDeletedOrThrow(Long id, boolean isDeleted) {
+        return productRepository.findByIdAndIsDeleted(id, isDeleted)
+                .orElseThrow(() -> new IllegalStateException("Product with ID " + id + " and isDeleted " + isDeleted + " does not exist."));
+    }
+    
+
+    public Product getProductByIdOrThrow(Long id) {
+        return productRepository.findById(id)
+                .orElseThrow(() -> new IllegalStateException("Product with ID " + id + " does not exist."));
     }
 
     // Add a new product to the database
