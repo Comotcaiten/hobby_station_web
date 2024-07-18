@@ -36,6 +36,13 @@ public class CartService {
         // cartItems.add(new CartItem(product, quantity));
     }
 
+    public void updateCartItem(Long productId, int quantity) {
+        cartItems.stream()
+            .filter(item -> item.getProduct().getId().equals(productId))
+            .findFirst()
+            .ifPresent(item -> item.setQuantity(quantity));
+    }
+
     public List<CartItem> getCartItems() {
         return cartItems;
     }
@@ -46,5 +53,11 @@ public class CartService {
 
     public void clearCard() {
         cartItems.clear();
+    }
+
+    public double calculateTotalPrice() {
+        return cartItems.stream()
+                        .mapToDouble(item -> item.getProduct().getPrice() * item.getQuantity())
+                        .sum();
     }
 }

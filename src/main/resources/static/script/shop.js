@@ -22,19 +22,15 @@ function loadProductsByCategory(id) {
         productList += `
             <div class="product-item col-6 col-sm-4" style="width: 18rem;">
               <a href="/products-detail/${product.id}" class="product-link">
-                <img src="${product.img}" class="card-img-top" alt="${
-          product.name
-        }" title="${product.name}">
+                <img src="${product.img}" class="card-img-top" alt="${product.name}" title="${product.name}">
               </a>
               <div class="card-body">
-                <h5 class="card-title" title="${product.name}">${
-          product.name
-        }</h5>
+                <h5 class="card-title" title="${product.name}">${product.name}</h5>
                 <p class="card-text">${product.price.toLocaleString("vi-VN", {
-                  style: "currency",
-                  currency: "VND",
-                })}</p>
-                
+                    style: "currency",
+                    currency: "VND",
+                  })}
+                </p>  
                 <form action="/cart/add" method="post" class="btn-action">
                   <input type="hidden" name="quantity" value="1">
                   <input type="hidden" value="${product.id}" name="productId"/>

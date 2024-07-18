@@ -98,6 +98,7 @@ public class ProductService {
         existingProduct.setDescription(product.getDescription());
         existingProduct.setCategory(product.getCategory());
         existingProduct.setBrand(product.getBrand());
+        existingProduct.setImg(product.getImg());
         return productRepository.save(existingProduct);
     }
     // Delete a product by its id

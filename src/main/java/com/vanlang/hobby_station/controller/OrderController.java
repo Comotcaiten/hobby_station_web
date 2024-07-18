@@ -24,6 +24,14 @@ public class OrderController {
     @GetMapping("/checkout")
     public String checkout(Model model) {
         model.addAttribute("content", "cart/checkout");
+        double total;
+        try {
+            total = cartService.calculateTotalPrice();
+        } catch (Exception e) {
+            // TODO: handle exception
+            total = 0;
+        }
+        model.addAttribute("total", total);
         return "layout";
     }
 

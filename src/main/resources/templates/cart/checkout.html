@@ -30,7 +30,31 @@
                 <option value="online">Online Payment</option>
             </select>
         </div>
-        <button type="submit" class="btn btn-primary">Submit Order</button>
+        <hr class="my-4" />
+        <div class="mb-3" th:if="${total}">
+            <h3 class="mb-0">Summary</h3>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+                  Shipping
+                  <span>Gratis</span>
+                </li>
+                <li
+                  class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
+                  <div>
+                    <strong>Total amount</strong>
+                    <strong>
+                      <p class="mb-0">(including VAT)</p>
+                    </strong>
+                  </div>
+                  <h2><strong th:text="${#numbers.formatDecimal(total, 1, 'COMMA', 0, 'POINT')} + ' đ'">$53.98</strong></h2>
+                </li>
+            </ul>
+            <hr class="my-4" />
+        </div>
+        <button type="submit" class="btn btn-primary btn-lg">Submit Order</button>
+        <button type="reset" class="btn btn-secondary btn-lg">Reset Order</button>
+        <a href="/cart" class="btn btn-danger btn-lg">Cancel</a>
     </form>
+    <hr class="my-4" />
 </section>
 <!--Thêm các thông tin bổ sung cho đơn đặt hàng như địa chỉ giao hàng, số điện thoại, email, ghi chú, phương thức thanh toán.-->
