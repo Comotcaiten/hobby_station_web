@@ -44,7 +44,6 @@ function loadProductsByCategory(id) {
               </div>
             </div>`;
       });
-
       $(".sanpham").html(productList);
     },
     error: function (xhr, status, error) {

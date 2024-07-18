@@ -2,6 +2,7 @@ package com.vanlang.hobby_station.service;
 
 import com.vanlang.hobby_station.model.Product;
 import com.vanlang.hobby_station.repository.ProductRepository;
+
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -123,5 +124,30 @@ public class ProductService {
                 .orElseThrow(() -> new IllegalStateException("Product with ID " + id + " does not exist."));
         product.setIsDeleted(false);
         productRepository.save(product);
+    }
+    
+    // News products
+    // Lấy danh sách các sản phẩm mới nhất
+    public List<Product> getNewestProducts(int limit) {
+        long count = productRepository.count();
+        if ((count <= 0) || (limit <= 0)) {
+            return null;
+        }
+
+        // Lấy danh sách sản phẩm đã sắp xếp theo thời gian tạo
+        List<Product> allProducts = productRepository.findAllByOrderByCreatedAtDesc();
+
+        // Đảm bảo n không vượt quá kích thước của danh sách
+        int size = Math.min(limit, allProducts.size());
+
+        // Giới hạn lấy ra tối đa 4 sản phẩm
+        if (size  > 4) {
+            size = 4;
+        }
+
+
+
+        // Lấy n sản phẩm đầu tiên từ danh sách
+        return allProducts.subList(0, size);
     }
 }

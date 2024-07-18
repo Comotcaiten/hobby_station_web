@@ -1,5 +1,7 @@
 package com.vanlang.hobby_station.model;
 
+import java.util.Date;
+
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.*;
@@ -30,4 +32,14 @@ public class Product {
     @ManyToOne
     @JoinColumn(name = "brand_id")
     private Brand brand;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createdAt;
+
+    @PrePersist
+    protected void onCreate() {
+        this.createdAt = new Date();
+    }
+    // @Column(name = "created_at", nullable = false, updatable = false)
+    
 }

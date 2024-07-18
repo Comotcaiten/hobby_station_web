@@ -30,4 +30,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     List<Product> findByPriceGreaterThan(Double price);
     List<Product> findByPriceLessThan(Double price);
     List<Product> findByPriceEquals(Double price);
+
+    // Date
+    List<Product> findAllByOrderByCreatedAtDesc();
 }

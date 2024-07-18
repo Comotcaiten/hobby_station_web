@@ -60,10 +60,6 @@ public class ProductApiController {
     }
 
     // Name - Searching
-    // @GetMapping("/search/{name}")
-    // public List<Product> searchProducts(@PathVariable("name") String name) {
-    //     return productService.searchProductsByName(name);
-    // }
 
     @GetMapping("/search")
     public List<Product> searchProducts(@RequestParam(value = "name", required = false) String name) {
@@ -122,5 +118,11 @@ public class ProductApiController {
     @GetMapping("/equal/{id}")
     public List<Product> getAllProductsEqual(@PathVariable Double id) {
         return productService.getProductsByPriceEquals(id);
+    }
+
+    // News
+    @GetMapping("/newest/{limit}")
+    public List<Product> getNewestProducts(@PathVariable int limit) {
+        return productService.getNewestProducts(limit);
     }
 }
