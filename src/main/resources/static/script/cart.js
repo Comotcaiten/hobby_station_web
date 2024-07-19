@@ -85,6 +85,7 @@ function displayCart(cartItems) {
                         </a>
                     </div>
                     <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+                        <label class="form-label" for="form1">Quantity</label>
                         <div class="d-flex mb-4 quanity-container" style="max-width: 300px">
                             <button class="btn btn-primary px-3 me-2 minus">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash-lg" viewBox="0 0 16 16">
@@ -93,7 +94,7 @@ function displayCart(cartItems) {
                             </button>
                             <div class="form-outline" data-id=${item.product.id}>
                                 <input id="form1-quantity" data-id=${item.product.id} min="0" name="quantity" value="${item.quantity}" type="number" class="form-control quantity-input" />
-                                <label class="form-label" for="form1">Quantity</label>
+                                
                             </div>
                             <button class="btn btn-primary px-3 ms-2 plus">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
@@ -129,6 +130,7 @@ function loadCart() {
     method: "GET",
     success: function (cartItems) {
       displayCart(cartItems);
+      totalQuanityCartItem();
     },
   });
 }
@@ -195,6 +197,25 @@ function clearCart() {
             loadCart();
         }
     });
+}
+
+
+function totalQuanityCartItem() {
+
+    $.ajax({
+        url: "/api/cart/quanity",
+        method: "GET",
+        success: function (total) {
+            updateCartTB(total);
+        },
+    });
+}
+
+function updateCartTB(total) {
+    let update_cart = $("#so-quanitys");
+    update_cart.empty();
+    update_cart.html(total);
+    update_cart.attr("title", total);
 }
 
 // </Hàm>

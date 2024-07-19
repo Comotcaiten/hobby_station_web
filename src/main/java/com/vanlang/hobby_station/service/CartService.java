@@ -60,4 +60,12 @@ public class CartService {
                         .mapToDouble(item -> item.getProduct().getPrice() * item.getQuantity())
                         .sum();
     }
+
+    public long totalQuanity() {
+        try {
+            return cartItems.stream().mapToLong(item -> item.getQuantity()).sum();
+        } catch (Exception e) {
+            return -1;
+        }
+    }
 }

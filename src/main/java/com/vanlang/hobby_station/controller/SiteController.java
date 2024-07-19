@@ -25,30 +25,25 @@ public class SiteController {
 
     @GetMapping
     public String home(Model model){
-        model.addAttribute("products", productService.getProductsByIsDeleted(false));
-        model.addAttribute("content", "/site/index");
-        return "layout";
+        model.addAttribute("products", productService.getNewestProducts(4));
+        return "site/index";
     }
 
     @GetMapping ("/shop")
     public String shop(Model model){
         model.addAttribute("products", productService.getProductsByIsDeleted(false));
-        model.addAttribute("content", "/site/shop");
         model.addAttribute("categories", categoryService.getAllCategories());
-        return "layout";
+        return "site/shop";
     }
 
     @GetMapping ("/products-detail/{id}")
     public String detail(@PathVariable Long id, Model model){
-        System.out.println("------------------------------------");
-        if (!productService.getProductByIdAndIsDeleted(id, false).isPresent())
-        {
+        if (!productService.getProductByIdAndIsDeleted(id, false).isPresent()) {
             return "redirect:/shop";
         }
-        Product product =  productService.getProductByIdAndIsDeletedOrThrow(id, false);
+        Product product = productService.getProductByIdAndIsDeletedOrThrow(id, false);
         model.addAttribute("product", product);
-        model.addAttribute("content", "/site/detail-product");
-        return "layout";
+        return "site/detail-product";
     }
 
     @GetMapping("/search")
@@ -61,9 +56,6 @@ public class SiteController {
         }
 
         model.addAttribute("products", products);
-        model.addAttribute("content", "/site/search");
-        return "layout";
+        return "site/search";
     }
-    
-    
 }

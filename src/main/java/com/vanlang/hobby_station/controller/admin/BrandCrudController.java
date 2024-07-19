@@ -23,67 +23,44 @@ public class BrandCrudController {
     @GetMapping("/add")
     public String showAddForm(Model model) {
         model.addAttribute("brand", new Brand());
-
-        model.addAttribute("content", "/brands/add-brand");
-        return "dashboard-layout";
+        return "/brands/add-brand";
     }
 
     @PostMapping("/add")
     public String addBrand(@Valid Brand brand, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
-            
-            model.addAttribute("content", "/brands/add-brand");
-            return "dashboard-layout";
+            return "/brands/add-brand";
         }
         brandService.addBrand(brand);
         return "redirect:/admin/brands";
     }
 
-    //Hiển thị các danh mục
     @GetMapping()
     public String listBrands(Model model){
         model.addAttribute("brands",brandService.getAllBrands());
-
-        model.addAttribute("content", "/brands/brands-list");
-        return "dashboard-layout";
+        return "/brands/brands-list";
     }
 
-    // GET request to show brands edit form
     @GetMapping("/edit/{id}")
     public String showUpdateForm(@PathVariable("id") Long id, Model model) {
         Brand brand = brandService.getBrandById(id).orElseThrow(() -> new IllegalArgumentException("Invalid brand Id:" + id));
-        model.addAttribute("brands", brand);
-
-        model.addAttribute("content", "/brands/update-brand");
-        return "dashboard-layout";
+        model.addAttribute("brand", brand);
+        return "/brands/update-brand";
     }
 
-    // POST request to update brands
     @PostMapping("/update/{id}")
     public String updateBrands(@PathVariable("id") Long id, @Valid Brand brand, BindingResult result, Model model) {
         if (result.hasErrors()) {
             brand.setId(id);
-
-            model.addAttribute("content", "/brands/update-brand");
-            return "dashboard-layout";
+            return "/brands/update-brand";
         }
         brandService.updateBrand(brand);
-        model.addAttribute("brands", brandService.getAllBrands());
         return "redirect:/admin/brands";
     }
 
-    // GET request for deleting brands
     @GetMapping("/delete/{id}")
     public String deleteBrand(@PathVariable("id") Long id, Model model) {
-        // Brand brand = brandService.getBrandById(id).orElseThrow(() -> new IllegalArgumentException("Invalid brand Id:" + id));
-        // try {
-        //     brand.getId();
-        // } catch (Exception e) {
-        //     // TODO: handle exception
-        //     System.out.println(e);
-        // }
-        // brandService.deleteBrand(id);
-        // model.addAttribute("brands", brandService.getAllBrand());
+        brandService.deleteBrand(id);
         return "redirect:/admin/brands";
     }
 }

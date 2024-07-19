@@ -23,7 +23,6 @@ public class OrderController {
 
     @GetMapping("/checkout")
     public String checkout(Model model) {
-        model.addAttribute("content", "cart/checkout");
         double total;
         try {
             total = cartService.calculateTotalPrice();
@@ -32,7 +31,7 @@ public class OrderController {
             total = 0;
         }
         model.addAttribute("total", total);
-        return "layout";
+        return "cart/checkout";
     }
 
     @PostMapping("/submit")
@@ -54,8 +53,6 @@ public class OrderController {
     @GetMapping("/confirmation")
     public String orderConfirmation(Model model) {
         model.addAttribute("message", "Your order has been successfully placed.");
-
-        model.addAttribute("content", "cart/order-confirmation");
-        return "layout";
+        return "cart/order-confirmation";
     }
 }

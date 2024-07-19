@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security5"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
   <head>
     <meta charset="UTF-8" />
     <title>Trang chủ</title>
@@ -15,73 +16,48 @@
       crossorigin="anonymous"
     ></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <layout:fragment name="head"></layout:fragment>
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="/">Hobby-Station</a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="/">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a
-                class="nav-link dropdown-toggle"
-                href="#"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                Dropdown
-              </a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="/shop">Shop</a></li>
-                <li><a class="dropdown-item" href="/">Home</a></li>
-                <li><hr class="dropdown-divider" /></li>
-                <li>
-                  <a class="dropdown-item" href="#">Something else here</a>
-                </li>
+    <!-- <div class="header" th:insert="partials/header :: headerFragment"></div> -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-primary">
+      <div class="container-fluid"><a class="navbar-brand text-white" href="/products">Web Bán Hàng</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                  aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span
+                  class="navbar-toggler-icon"></span></button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li class="nav-item"><a class="nav-link text-white active" aria-current="page"
+                                          href="/products">Product</a></li>
+                  <li class="nav-item" sec:authorize="hasAnyAuthority('ADMIN')"><a th:href="@{/products/add}"
+                                                                                   class="nav-link text-white">Add New
+                      Product</a></li>
+                  <li class="nav-item" sec:authorize="hasAnyAuthority('ADMIN')"><a th:href="@{/categories/add}"
+                                                                                   class="nav-link text-white">Add New
+                      Category</a></li>
               </ul>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-            </li>
-          </ul>
-          <form class="d-flex" role="search" action="/search" method="get">
-            <input
-              class="form-control me-2"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-              name="name"
-            />
-            <button class="btn btn-outline-success" type="submit">
-              Search
-            </button>
-          </form>
-        </div>
+              <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
+                  <li class="nav-item d-flex align-items-center" sec:authorize="isAuthenticated()"><span
+                          class="navbar-text text-white"> Xin chào, <span sec:authentication="name"
+                                                                          style="margin-right: 20px;"></span> </span></li>
+                  <li class="nav-item" sec:authorize="isAuthenticated()">
+                      <form th:action="@{/logout}" method="post">
+                          <button class="btn btn-outline-light" type="submit">Logout</button>
+                      </form>
+                  </li>
+                  <li class="nav-item" sec:authorize="!isAuthenticated()"><a class="btn btn-outline-light" href="/login">Login</a>
+                  </li>
+              </ul>
+          </div>`
       </div>
-    </nav>
+  </nav>
+    <!-- Main -->
     <div class="container mt-5">
-      <section th:replace="${content}">
+      <section layout:fragment="content">
         <!-- Nội dung cụ thể của từng trang sẽ được đặt tại đây -->
       </section>
     </div>
+    <!-- Main -->
 
     <!-- Footer -->
     <footer class="text-center text-lg-start bg-body-tertiary text-muted">

@@ -127,7 +127,7 @@ public class ProductService {
     }
     
     // News products
-    // Lấy danh sách các sản phẩm mới nhất
+    // Lấy danh sách các sản phẩm mới nhất với isDelete = false
     public List<Product> getNewestProducts(int limit) {
         long count = productRepository.count();
         if ((count <= 0) || (limit <= 0)) {
@@ -135,7 +135,7 @@ public class ProductService {
         }
 
         // Lấy danh sách sản phẩm đã sắp xếp theo thời gian tạo
-        List<Product> allProducts = productRepository.findAllByOrderByCreatedAtDesc();
+        List<Product> allProducts = productRepository.findAllByIsDeletedOrderByCreatedAtDesc(false);
 
         // Đảm bảo n không vượt quá kích thước của danh sách
         int size = Math.min(limit, allProducts.size());
@@ -144,8 +144,6 @@ public class ProductService {
         if (size  > 4) {
             size = 4;
         }
-
-
 
         // Lấy n sản phẩm đầu tiên từ danh sách
         return allProducts.subList(0, size);

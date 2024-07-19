@@ -22,6 +22,9 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     List<Product> findByBrandId(Long brandId);
     List<Product> findByBrandIdAndIsDeleted(Long brandId, boolean isDeleted);
 
+    // Brand and Category
+    List<Product> findByBrandIdAndCategoryIdAndIsDeleted(Long brandId, Long categoryId, boolean isDeleted);
+
     // Category
     List<Product> findByCategoryId(Long categoryId);
     List<Product> findByCategoryIdAndIsDeleted(Long categoryId, boolean isDeleted);
@@ -31,6 +34,11 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     List<Product> findByPriceLessThan(Double price);
     List<Product> findByPriceEquals(Double price);
 
+    List<Product> findByPriceGreaterThanAndIsDeleted(Double price, boolean isDeleted);
+    List<Product> findByPriceLessThanAndIsDeleted(Double price, boolean isDeleted);
+    List<Product> findByPriceEqualsAndIsDeleted(Double price, boolean isDeleted);
+
     // Date
     List<Product> findAllByOrderByCreatedAtDesc();
+    List<Product> findAllByIsDeletedOrderByCreatedAtDesc(boolean isDeleted);
 }

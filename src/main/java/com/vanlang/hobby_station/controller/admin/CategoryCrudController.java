@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
+
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/admin/categories")
@@ -24,87 +25,69 @@ public class CategoryCrudController {
     @GetMapping("/add")
     public String showAddForm(Model model) {
         model.addAttribute("category", new Category());
-        
-        model.addAttribute("content", "/categories/add-category");
-        return "dashboard-layout";
+        return "/categories/add-category";
     }
 
     @PostMapping("/add")
     public String addCategory(@Valid Category category, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
-
-            model.addAttribute("content", "/categories/add-category");
-            return "dashboard-layout";
+            return "/categories/add-category";
         }
         categoryService.addCategory(category);
         return "redirect:/admin/categories";
     }
 
-    // Hiển thị danh sách danh mục
     @GetMapping
     public String listCategories(Model model) {
         List<Category> categories = categoryService.getAllCategories();
         model.addAttribute("categories", categories);
-        model.addAttribute("opt",new String("categories"));
-
-        model.addAttribute("content", "/categories/categories-list");
-        return "dashboard-layout";
+        model.addAttribute("opt", "categories");
+        return "/categories/categories-list";
     }
 
-    @GetMapping ("/trash-can")
+    @GetMapping("/trash-can")
     public String trashCan(Model model) {
         List<Category> categories = categoryService.getAllCategories();
         model.addAttribute("categories", categories);
-        model.addAttribute("opt",new String("categories"));
-
-        model.addAttribute("content", "/categories/trash-can-categories");
-        return "dashboard-layout";
+        model.addAttribute("opt", "categories");
+        return "/categories/trash-can-categories";
     }
 
-    // GET request to show category edit form
     @GetMapping("/edit/{id}")
     public String showUpdateForm(@PathVariable("id") Long id, Model model) {
-        Category category = categoryService.getCategoryById(id).orElseThrow(() -> new IllegalArgumentException("Invalid category Id:" + id));
+        Category category = categoryService.getCategoryById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid category Id:" + id));
         model.addAttribute("category", category);
-
-        model.addAttribute("content", "/categories/update-category");
-        return "dashboard-layout";
+        return "/categories/update-category";
     }
 
-    // POST request to update category
     @PostMapping("/update/{id}")
     public String updateCategory(@PathVariable("id") Long id, @Valid Category category, BindingResult result, Model model) {
         if (result.hasErrors()) {
             category.setId(id);
-            
-            model.addAttribute("content", "/categories/update-category");
-            return "dashboard-layout";
+            return "/categories/update-category";
         }
         categoryService.updateCategory(category);
-        model.addAttribute("categories", categoryService.getAllCategories());
         return "redirect:/admin/categories";
     }
 
-//    // GET request for deleting category
-//    @GetMapping("/delete/{id}")
-//    public String deleteCategory(@PathVariable("id") Long id, Model model) {
-//        Category category = categoryService.getCategoryById(id).orElseThrow(() -> new IllegalArgumentException("Invalid category Id:" + id));
-//        categoryService.deleteCategory(id);
-//        model.addAttribute("categories", categoryService.getAllCategories());
-//        return "redirect:/admin/dashboard/categories";
-//    }
+    // @GetMapping("/delete/{id}")
+    // public String deleteCategory(@PathVariable("id") Long id, Model model) {
+    //     Category category = categoryService.getCategoryById(id)
+    //             .orElseThrow(() -> new IllegalArgumentException("Invalid category Id:" + id));
+    //     categoryService.deleteCategory(id);
+    //     return "redirect:/admin/categories";
+    // }
 
-//    // Handle request to delete a product
-//    @GetMapping("/destroy/{id}")
-//    public String destroyProducts(@PathVariable("id") Long id) {
-////        categoryService.destroyCategory(id);
-//        return "redirect:/admin/dashboard/categories/trash-can";
-//    }
+    @GetMapping("/destroy/{id}")
+    public String destroyCategory(@PathVariable("id") Long id) {
+        categoryService.destroyCategory(id);
+        return "redirect:/admin/categories/trash-can";
+    }
 
-//    //
-//    @GetMapping("/restore/{id}")
-//    public String restoreProducts(@PathVariable("id") Long id) {
-//        categoryService.restoreCategory(id);
-//        return "redirect:/admin/dashboard/categories/trash-can";
-//    }
+    // @GetMapping("/restore/{id}")
+    // public String restoreCategory(@PathVariable("id") Long id) {
+    //     categoryService.restoreCategory(id);
+    //     return "redirect:/admin/categories/trash-can";
+    // }
 }
