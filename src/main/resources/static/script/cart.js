@@ -1,3 +1,6 @@
+
+
+// ------------ CART ---------------------------------------
 $(document).ready(function () {
 
     // -> Khi người dùng thay đổi số lượng sản phẩm
@@ -131,6 +134,8 @@ function loadCart() {
     success: function (cartItems) {
       displayCart(cartItems);
       totalQuanityCartItem();
+      let cart_span = $(".cart-quanity-span");
+      cart_span.hide();
     },
   });
 }

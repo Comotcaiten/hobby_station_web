@@ -1,21 +1,30 @@
 package com.vanlang.hobby_station.service;
 
 import com.vanlang.hobby_station.model.Product;
+import com.vanlang.hobby_station.repository.OrderDetailRepository;
 import com.vanlang.hobby_station.repository.ProductRepository;
 
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 @Transactional
 public class ProductService {
+
+    @Autowired
+    private OrderDetailRepository orderDetailRepository;
+
     private final ProductRepository productRepository;
+    
     // Retrieve all products from the database
     public List<Product> getAllProducts() {
         return productRepository.findAll();
@@ -129,23 +138,33 @@ public class ProductService {
     // News products
     // Lấy danh sách các sản phẩm mới nhất với isDelete = false
     public List<Product> getNewestProducts(int limit) {
-        long count = productRepository.count();
-        if ((count <= 0) || (limit <= 0)) {
-            return null;
-        }
 
         // Lấy danh sách sản phẩm đã sắp xếp theo thời gian tạo
         List<Product> allProducts = productRepository.findAllByIsDeletedOrderByCreatedAtDesc(false);
 
         // Đảm bảo n không vượt quá kích thước của danh sách
-        int size = Math.min(limit, allProducts.size());
-
-        // Giới hạn lấy ra tối đa 4 sản phẩm
-        if (size  > 4) {
-            size = 4;
-        }
+        limit = Math.min(limit, allProducts.size());
 
         // Lấy n sản phẩm đầu tiên từ danh sách
-        return allProducts.subList(0, size);
+        return allProducts.subList(0, limit);
+    }
+
+    // Danh sách tổng sản lượng bán ra của từng sản phẩm
+
+    public List<Object[]> getTopSelling() {
+        return orderDetailRepository.findTopSellingProducts();
+    }
+
+    public List<Object[]> getTopSellingProductsByIsDeleted(boolean isDelete) {
+        return orderDetailRepository.findTopSellingProductsByIsDeleted(isDelete);
+    }
+
+        // Lấy danh sách các sản phẩm mới nhất với isDelete = false
+    public List<Product> getTopSellingProducts(int limit) {
+        List<Product> allProducts = orderDetailRepository.findTopSellingProductsObj(false);
+        limit = Math.min(limit, allProducts.size());
+        return allProducts.stream()
+                          .limit(limit)
+                          .collect(Collectors.toList());
     }
 }

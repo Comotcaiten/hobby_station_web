@@ -36,3 +36,22 @@ body{
   height: auto;
   border-radius: 5px;
 }
+
+.card-title {
+  white-space: nowrap; /* Đảm bảo nội dung không bị xuống dòng */
+  overflow: hidden; /* Ẩn phần nội dung bị tràn */
+  text-overflow: ellipsis; /* Thêm dấu ... */
+  margin-top: 10px
+}
+
+.price {
+  margin-top: 10px;
+}
+
+.icon-cart, .bi {
+  margin: 0;
+}
+
+.footer {
+  margin-top: 16px;
+}

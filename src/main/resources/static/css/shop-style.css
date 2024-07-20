@@ -95,6 +95,8 @@ h2.SPNB,
 h2.SPBC {
   margin: 20px 0 10px;
   font-size: 24px;
+  padding: 10px;
+  border-radius: 10px;
 }
 
 .sanpham {

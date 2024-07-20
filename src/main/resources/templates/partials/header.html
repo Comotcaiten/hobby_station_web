@@ -1,13 +1,4 @@
 <header th:fragment="headerFragment">
-    <link rel="stylesheet" href="/css/header.css">
-    <script src="/script/myApi.js" sec:authorize="isAuthenticated()"></script>
-    
-    <link rel="apple-touch-icon" href="/docs/5.3/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
-    <link rel="icon" href="/docs/5.3/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
-    <link rel="icon" href="/docs/5.3/assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
-    <link rel="manifest" href="/docs/5.3/assets/img/favicons/manifest.json">
-    <link rel="mask-icon" href="/docs/5.3/assets/img/favicons/safari-pinned-tab.svg" color="#712cf9">
-    <link rel="icon" href="/docs/5.3/assets/img/favicons/favicon.ico">
     <meta name="theme-color" content="#712cf9">
 
     <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
@@ -43,19 +34,19 @@
 
           <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small" sec:authorize="isAuthenticated()">
             <li>
-              <a href="#" class="nav-link text-secondary">
+              <a href="/#" class="nav-link text-secondary">
                 <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#home"/></svg>
                 Home
               </a>
             </li>
             <li>
-              <a href="#" class="nav-link text-white">
+              <a href="/admin" class="nav-link text-white" sec:authorize="hasAuthority('ADMIN')">
                 <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#speedometer2"/></svg>
                 Dashboard
               </a>
             </li>
             <li>
-              <a href="#" class="nav-link text-white">
+              <a href="/orders" class="nav-link text-white">
                 <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#table"/></svg>
                 Orders
               </a>
@@ -67,19 +58,15 @@
               </a>
             </li>
             <li>
-              <a href="#" class="nav-link text-white">
-                <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#people-circle"/></svg>
-                Customers
-              </a>
-            </li>
-            <li>
                 <a href="/cart" class="nav-link text-white position-relative">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi d-block mx-auto mb-1" viewBox="0 0 16 16">
                         <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l.84 4.479 9.144-.459L13.89 4zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
                     </svg>
                     Carts
                     <!-- Badge với số lượng từ biến -->
-                    <span class="badge bg-danger position-absolute top-0 start-100 translate-middle rounded-pill" id="update-cart-amount">0</span>
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger cart-quanity-span" id="update-cart-amount">
+                      0
+                    </span>
                 </a>
             </li>
 

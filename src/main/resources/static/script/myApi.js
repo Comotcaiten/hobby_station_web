@@ -1,56 +1,61 @@
-// $(document).ready(function () {
 
-//     $(document).on("click", ".btn-add-cart" , function () {
-        
-//         let productId = $(this).data("id");
+// ----------- HEAD ----------------
+$(document).ready(function () {
 
-//         addCartItem(productId, 1);
-//     });
+    $(document).on("click", ".btn-add-cart" , function () {
+        let productId = $(this).data("id");
 
-//     loadCart();
-// })
+        addCartItem(productId, 1);
+    });
 
-
-// //
-// function loadCart() {
-//     totalQuanityCartItem();
-// }
+    loadCart();
+})
 
 
+//
+function loadCart() {
+    totalQuanityCartItem();
+}
 
-// // Hàm dùng để thêm sản phẩm vào giỏ hàng
-// function addCartItem(productId, quantity) {
-//     if (quantity <= 0 || quantity == null) {
-//         quantity = 1;
-//     }
-//     else {
-//         $.ajax({
-//             url: "/api/cart/add",
-//             method: "POST",
-//             data: {
-//             productId: productId,
-//             quantity: quantity,
-//             },
-//             success: function () {
-//                 loadCart();
-//             },
-//         });
-//     }
-// }
+function print(cotent) {
+    console.log(cotent);
+}
 
-// function totalQuanityCartItem() {
 
-//     $.ajax({
-//         url: "/api/cart/quanity",
-//         method: "GET",
-//         success: function (total) {
-//             updateCartTB(total);
-//         },
-//     });
-// }
 
-// function updateCartTB(total) {
-//     let update_cart = $("#update-cart-amount");
-//     update_cart.html(total);
-//     update_cart.attr("title", total);
-// }
+// Hàm dùng để thêm sản phẩm vào giỏ hàng
+function addCartItem(productId, quantity) {
+    if (quantity <= 0 || quantity == null) {
+        quantity = 1;
+    }
+    else {
+        $.ajax({
+            url: "/api/cart/add",
+            method: "POST",
+            data: {
+            productId: productId,
+            quantity: quantity,
+            },
+            success: function () {
+                loadCart();
+            },
+        });
+    }
+}
+
+function totalQuanityCartItem() {
+
+    $.ajax({
+        url: "/api/cart/quanity",
+        method: "GET",
+        success: function (total) {
+            updateCartTB(total);
+        },
+    });
+}
+
+function updateCartTB(total) {
+    let update_cart = $("#update-cart-amount");
+    update_cart.html(total);
+    update_cart.attr("title", total);
+}

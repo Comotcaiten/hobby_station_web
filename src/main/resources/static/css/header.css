@@ -88,23 +88,3 @@
     max-width: 3em; /* Giới hạn chiều rộng của badge */
     
 }
-
-.position-relative {
-    position: relative;
-}
-
-.position-absolute {
-    position: absolute;
-}
-
-.top-0 {
-    top: 0;
-}
-
-.start-100 {
-    left: 100%;
-}
-
-.translate-middle {
-    transform: translate(-50%, -50%);
-}

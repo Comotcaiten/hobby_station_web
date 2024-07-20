@@ -35,7 +35,6 @@ public class CategoryApiController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Category> updateProduct(@PathVariable Long id, @RequestBody Category categoryDetails) {
-        System.out.println("PUT");
         Category category = categoryService.getCategoryById(id).orElseThrow(() -> new RuntimeException("Category not found on :: " + id));
         category.setName(categoryDetails.getName());
         final Category updatedCategory = categoryService.addCategory(category);

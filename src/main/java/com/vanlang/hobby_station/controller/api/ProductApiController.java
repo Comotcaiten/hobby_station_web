@@ -3,6 +3,7 @@ package com.vanlang.hobby_station.controller.api;
 import com.vanlang.hobby_station.model.Product;
 import com.vanlang.hobby_station.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -121,8 +122,33 @@ public class ProductApiController {
     }
 
     // News
-    @GetMapping("/newest/{limit}")
-    public List<Product> getNewestProducts(@PathVariable int limit) {
-        return productService.getNewestProducts(limit);
+    @GetMapping("/newest")
+    public List<Product> getNewestProducts() {
+        return productService.getNewestProducts(4);
     }
+
+    // Selling
+    // Lưu ý là [id của sản phẩm, số lượng sản phẩm bán ra]
+
+    // Lưu ý là [id của sản phẩm, số lượng sản phẩm bán ra]
+    // @GetMapping("/top-selling")
+    // public ResponseEntity<List<Object[]>> getTopSellingProductsByIsDelete() {
+    //     List<Object[]> results = productService.getTopSellingProductsByIsDeleted(false);
+    //     return new ResponseEntity<>(results, HttpStatus.OK);
+    // }
+
+    @GetMapping("/top-selling/all")
+    public ResponseEntity<List<Object[]>> getTopSellingProducts() {
+        List<Object[]> results = productService.getTopSelling();
+        return new ResponseEntity<>(results, HttpStatus.OK);
+    }
+    
+    @GetMapping("/top-selling")
+    public ResponseEntity<List<Product>> getTopSellingProductsObj() {
+        List<Product> topSellingProducts = productService.getTopSellingProducts(4);
+        return new ResponseEntity<>(topSellingProducts, HttpStatus.OK);
+    }
+
+
+
 }

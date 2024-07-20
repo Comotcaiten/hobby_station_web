@@ -1,13 +1,10 @@
 package com.vanlang.hobby_station.controller;
 
-import com.vanlang.hobby_station.model.CartItem;
 import com.vanlang.hobby_station.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @Controller
 @RequestMapping("/cart")

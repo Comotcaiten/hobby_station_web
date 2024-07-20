@@ -40,6 +40,5 @@ public class Product {
     protected void onCreate() {
         this.createdAt = new Date();
     }
-    // @Column(name = "created_at", nullable = false, updatable = false)
     
 }

@@ -9,13 +9,14 @@
 <body>
 <section layout:fragment="content" class="container mb-4">
     <link rel="stylesheet" href="/css/shop-style.css">
+    <link rel="stylesheet" href="/css/style.css">
     <script src="/script/shop.js"></script>
   <main>
     <div class="main-content">
       <aside id="sidebar">
         <div class="menu">
           <h1 class="SP">SẢN PHẨM</h1>
-          <ul class="list-link">
+          <ul class="list-link list-categories-shop">
             <li>
               <a href="#"
                 th:text="All"
@@ -35,7 +36,9 @@
       </aside>
       <div class="content">
         <section class="product-featured">
-          <h2 class="SPNB">SẢN PHẨM MỚI NHẤT</h2>
+          <div class="container-lg bg-white">
+            <h2 class="SPNB">SẢN PHẨM</h2>
+          </div>
           <div class="sanpham" id="sanpham">
           </div>
         </section>

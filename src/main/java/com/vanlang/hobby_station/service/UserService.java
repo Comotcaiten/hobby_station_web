@@ -82,4 +82,13 @@ public class UserService implements UserDetailsService {
     public boolean phoneExists(String phone) {
         return findByPhone(phone).isPresent();
     }
+
+    // Lấy id
+    // Trả về ID của người dùng
+    public Long getIdByUsername(String username) {
+        return userRepository.findByUsername(username)
+                            .map(User::getId)
+                            .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+    }
+
 }

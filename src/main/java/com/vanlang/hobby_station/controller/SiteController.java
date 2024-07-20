@@ -1,12 +1,18 @@
 package com.vanlang.hobby_station.controller;
 
+import com.vanlang.hobby_station.model.Order;
+import com.vanlang.hobby_station.model.OrderDetail;
 import com.vanlang.hobby_station.model.Product;
 import com.vanlang.hobby_station.service.CategoryService;
+import com.vanlang.hobby_station.service.OrderService;
 import com.vanlang.hobby_station.service.ProductService;
+import com.vanlang.hobby_station.service.UserService;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,10 +28,15 @@ public class SiteController {
     private ProductService productService;
     @Autowired
     private CategoryService categoryService;
+    @Autowired
+    private OrderService orderService;
+    @Autowired
+    private UserService userService;
 
     @GetMapping
     public String home(Model model){
         model.addAttribute("products", productService.getNewestProducts(4));
+        model.addAttribute("productsSelling", productService.getTopSellingProducts(4));
         return "site/index";
     }
 
@@ -36,7 +47,7 @@ public class SiteController {
         return "site/shop";
     }
 
-    @GetMapping ("/products-detail/{id}")
+    @GetMapping ("/detail/{id}")
     public String detail(@PathVariable Long id, Model model){
         if (!productService.getProductByIdAndIsDeleted(id, false).isPresent()) {
             return "redirect:/shop";
@@ -58,4 +69,21 @@ public class SiteController {
         model.addAttribute("products", products);
         return "site/search";
     }
+
+    @GetMapping("/orders")
+    public String listOrders(Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        Long userId = userService.getIdByUsername(username);
+        List<Order> orders = orderService.getOrdersByUserId(userId);
+
+        for (Order order : orders) {
+            List<OrderDetail> orderDetails = orderService.getOrderDetailsByOrderId(order.getId());
+            order.setOrderDetails(orderDetails); // Giả sử bạn đã có setter này trong Order model
+        }
+
+        model.addAttribute("orders", orders);
+        return "site/orders"; // Tên file HTML là orders.html
+    }
+    
 }
