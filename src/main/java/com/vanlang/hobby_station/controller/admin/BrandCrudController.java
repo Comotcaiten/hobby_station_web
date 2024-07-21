@@ -58,9 +58,4 @@ public class BrandCrudController {
         return "redirect:/admin/brands";
     }
 
-    @GetMapping("/delete/{id}")
-    public String deleteBrand(@PathVariable("id") Long id, Model model) {
-        brandService.deleteBrand(id);
-        return "redirect:/admin/brands";
-    }
 }

@@ -79,11 +79,11 @@ public class CategoryCrudController {
     //     return "redirect:/admin/categories";
     // }
 
-    @GetMapping("/destroy/{id}")
-    public String destroyCategory(@PathVariable("id") Long id) {
-        categoryService.destroyCategory(id);
-        return "redirect:/admin/categories/trash-can";
-    }
+    // @GetMapping("/destroy/{id}")
+    // public String destroyCategory(@PathVariable("id") Long id) {
+    //     categoryService.destroyCategory(id);
+    //     return "redirect:/admin/categories/trash-can";
+    // }
 
     // @GetMapping("/restore/{id}")
     // public String restoreCategory(@PathVariable("id") Long id) {

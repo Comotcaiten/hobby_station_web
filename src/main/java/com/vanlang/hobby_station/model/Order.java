@@ -1,5 +1,6 @@
 package com.vanlang.hobby_station.model;
 
+import java.util.ArrayList;
 import java.util.Date;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -25,11 +26,7 @@ public class Order {
     private String phoneNumber;
     private String email;
     private String orderNote;
-    private String paymentMethod;
-    
-
-    @OneToMany(mappedBy = "order")
-    private List<OrderDetail> orderDetails;
+    private String paymentMethod;   
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -38,14 +35,23 @@ public class Order {
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
 
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date deliveryDate;
+
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
-
+    
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<OrderDetail> orderDetails = new ArrayList<>();
+    
     @PrePersist
     protected void onCreate() {
         this.createdAt = new Date();
         status = OrderStatus.PENDING;
     }
+
+
+
 
     public double getTotalAmount() {
         return orderDetails.stream()
@@ -58,7 +64,6 @@ public class Order {
     public enum OrderStatus {
         PENDING,       // Đang chờ xử lý
         PROCESSING,    // Đang xử lý
-        SHIPPED,       // Đã vận chuyển
         DELIVERED,     // Đã giao hàng
         CANCELED       // Đã hủy
     }

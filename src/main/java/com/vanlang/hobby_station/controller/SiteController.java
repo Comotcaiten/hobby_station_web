@@ -47,7 +47,7 @@ public class SiteController {
         return "site/shop";
     }
 
-    @GetMapping ("/detail/{id}")
+    @GetMapping ("/product/{id}")
     public String detail(@PathVariable Long id, Model model){
         if (!productService.getProductByIdAndIsDeleted(id, false).isPresent()) {
             return "redirect:/shop";
@@ -77,13 +77,9 @@ public class SiteController {
         Long userId = userService.getIdByUsername(username);
         List<Order> orders = orderService.getOrdersByUserId(userId);
 
-        for (Order order : orders) {
-            List<OrderDetail> orderDetails = orderService.getOrderDetailsByOrderId(order.getId());
-            order.setOrderDetails(orderDetails); // Giả sử bạn đã có setter này trong Order model
-        }
-
         model.addAttribute("orders", orders);
         return "site/orders"; // Tên file HTML là orders.html
+        // return "redirect:/";
     }
     
 }

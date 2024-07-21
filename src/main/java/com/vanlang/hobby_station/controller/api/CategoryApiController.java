@@ -21,31 +21,10 @@ public class CategoryApiController {
         return categoryService.getAllCategories();
     }
 
-    @PostMapping
-    public void createCategory(@RequestBody Category category) {
-        categoryService.addCategory(category);
-    }
-
     @GetMapping("/{id}")
     public ResponseEntity<Category> getProductById(@PathVariable Long id) {
         System.out.println("Get " + id);
         Category category = categoryService.getCategoryById(id).orElseThrow(() -> new RuntimeException("Category not found on :: " + id));
         return ResponseEntity.ok().body(category);
     }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<Category> updateProduct(@PathVariable Long id, @RequestBody Category categoryDetails) {
-        Category category = categoryService.getCategoryById(id).orElseThrow(() -> new RuntimeException("Category not found on :: " + id));
-        category.setName(categoryDetails.getName());
-        final Category updatedCategory = categoryService.addCategory(category);
-        return ResponseEntity.ok(updatedCategory);
-    }
-
-//    @DeleteMapping("/{id}")
-//    public ResponseEntity<Void> deleteProduct(@PathVariable Long id) {
-//        Category category = categoryService.getCategoryById(id).orElseThrow(() -> new RuntimeException("Category not found on :: "
-//                + id));
-//        categoryService.destroyCategory(id);
-//        return ResponseEntity.ok().build();
-//    }
 }

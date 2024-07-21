@@ -6,7 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <title>Dashboard</title>
-
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/blog/">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
@@ -14,11 +19,21 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.2/dist/chart.umd.js" integrity="sha384-eI7PSr3L1XLISH8JdDII5YN/njoSsxfbrkCTnJrzXt+ENP5MOVBxD+l6sEG4zoLp" crossorigin="anonymous"></script>
+    <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <style>
         .bi {
           display: inline-block;
           width: 1rem;
           height: 1rem;
+        }
+        .bi-gift-fill {
+          display: none;
         }
 
         /*
@@ -30,9 +45,6 @@
             position: -webkit-sticky;
             position: sticky;
             top: 48px;
-          }
-          .navbar-search {
-            display: block;
           }
         }
 
@@ -81,6 +93,7 @@
           .bd-placeholder-img-lg {
             font-size: 3.5rem;
           }
+
         }
 
         .b-example-divider {
@@ -145,6 +158,17 @@
         .bd-mode-toggle .dropdown-menu .active .bi {
           display: block !important;
         }
+
+        /* Media query cho viewport nhỏ hơn 768px */
+        @media (max-width: 768px) {
+            .bi-gift-fill {
+                display: block;
+            }
+            .h3-company-name
+            {
+              display: none;
+            }
+        }
     </style>
 
 
@@ -155,24 +179,32 @@
 <body>
 
     <header class="navbar sticky-top bg-dark flex-md-nowrap p-0 shadow" data-bs-theme="dark">
-        <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6 text-white" href="/">Company name</a>
+        <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6 text-white" href="/">
+          <strong class="h3-company-name"><h3 style="padding-top: 10px;"> &nbsp; HOBBY STATION</h3></strong>
+          <span class="d-flex">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-gift-fill" viewBox="0 0 16 16">
+              <path d="M3 2.5a2.5 2.5 0 0 1 5 0 2.5 2.5 0 0 1 5 0v.006c0 .07 0 .27-.038.494H15a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h2.038A3 3 0 0 1 3 2.506zm1.068.5H7v-.5a1.5 1.5 0 1 0-3 0c0 .085.002.274.045.43zM9 3h2.932l.023-.07c.043-.156.045-.345.045-.43a1.5 1.5 0 0 0-3 0zm6 4v7.5a1.5 1.5 0 0 1-1.5 1.5H9V7zM2.5 16A1.5 1.5 0 0 1 1 14.5V7h6v9z"/>
+            </svg>
+          </span>
+        </a>
 
         <ul class="navbar-nav flex-row d-md-none">
             <li class="nav-item text-nowrap">
-                <button class="nav-link px-3 text-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSearch" aria-controls="navbarSearch" aria-expanded="false" aria-label="Toggle search">
-                    <svg class="bi"><use xlink:href="#search"/></svg>
-                </button>
+                <a class="nav-link px-3 text-white" type="button" data-bs-toggle="collapse" aria-controls="navbarSearch" aria-expanded="false" aria-label="Toggle search">
+                  <i class="bi bi-person-circle"></i>
+                  <span sec:authorize="isAuthenticated()" class="navbar-text text-white" style=" padding-bottom: 20px;"> 
+                    &nbsp; Xin chào, 
+                    <span sec:authentication="name" style="margin-right: 20px;">
+                    </span>
+                  </span>
+                </a>
             </li>
             <li class="nav-item text-nowrap">
                 <button class="nav-link px-3 text-white" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
-                    <svg class="bi"><use xlink:href="#list"/></svg>
+                  <i class="bi bi-list-task"></i>
                 </button>
             </li>
         </ul>
-
-        <div id="navbarSearch" class="navbar-search w-100 collapse">
-            <input class="form-control w-100 rounded-0 border-0" type="text" placeholder="Search" aria-label="Search">
-        </div>
     </header>
 
     <div class="container-fluid">
@@ -180,11 +212,19 @@
             <div class="sidebar border border-right col-md-3 col-lg-2 p-0 bg-body-tertiary">
                 <div class="offcanvas-md offcanvas-end bg-body-tertiary" tabindex="-1" id="sidebarMenu" aria-labelledby="sidebarMenuLabel">
                     <div class="offcanvas-header">
-                        <h5 class="offcanvas-title" id="sidebarMenuLabel">Company name</h5>
+                        <h5 class="offcanvas-title" id="sidebarMenuLabel">HOBBY STATION</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#sidebarMenu" aria-label="Close"></button>
                     </div>
                     <div class="offcanvas-body d-md-flex flex-column p-0 pt-lg-3 overflow-y-auto">
                         <ul class="nav flex-column">
+                          <li class="nav-item">
+                            <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="/admin/dashboard">
+                              <i class="bi bi-person-circle"></i>
+                              <span sec:authentication="name" style="margin-right: 20px;">
+                              </span>
+                            </a>
+                            </a>
+                        </li>
                             <li class="nav-item">
                                 <a class="nav-link d-flex align-items-center gap-2 active" aria-current="page" href="/admin/dashboard">
                                     <i class="bi bi-house-fill"></i>
@@ -192,42 +232,39 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link d-flex align-items-center gap-2" href="/admin/products">
+                                <a class="nav-link d-flex align-items-center gap-2 btn" href="/admin/products">
                                     <i class="bi bi-box-seam-fill"></i>
                                     Products
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link d-flex align-items-center gap-2" href="/admin/categories">
+                                <a class="nav-link d-flex align-items-center gap-2 btn" href="/admin/categories">
                                     <i class="bi bi-tags"></i>
                                     Categories
                                 </a>
                             </li>
                             <li class="nav-item">
-                              <a class="nav-link d-flex align-items-center gap-2" href="/admin/categories">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-person" viewBox="0 0 16 16">
-                                  <path d="M11 8a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
-                                  <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2M9.5 3A1.5 1.5 0 0 0 11 4.5h2v9.255S12 12 8 12s-5 1.755-5 1.755V2a1 1 0 0 1 1-1h5.5z"/>
-                                </svg>
-                                  Customers
-                              </a>
-                            </li>
-                            <li class="nav-item">
-                              <a class="nav-link d-flex align-items-center gap-2" href="/admin/categories">
+                              <a class="nav-link d-flex align-items-center gap-2 btn" href="/admin/brands">
                                 <i class="bi bi-briefcase-fill"></i>
                                   Brands
                               </a>
                             </li>
                             <li class="nav-item">
-                              <a class="nav-link d-flex align-items-center gap-2" href="#">
-                                <i class="bi bi-bar-chart-line-fill"></i>
-                                Report
+                              <a class="nav-link d-flex align-items-center gap-2 btn" href="/admin/customers">
+                                <i class="bi bi-file-person"></i> 
+                                  Customers
                               </a>
                             </li>
                             <li class="nav-item">
-                              <a class="nav-link d-flex align-items-center gap-2" href="#">
+                              <a class="nav-link d-flex align-items-center gap-2 btn" href="/admin/orders">
                                 <i class="bi bi-file-earmark"></i>
                                 Orders
+                              </a>
+                            </li>
+                            <li class="nav-item">
+                              <a class="nav-link d-flex align-items-center gap-2 btn" href="/admin/reports">
+                                <i class="bi bi-bar-chart-line-fill"></i>
+                                Report
                               </a>
                             </li>
                         </ul>
@@ -238,31 +275,12 @@
                                 <i class="bi bi-plus-circle"></i>
                             </a>
                         </h6>
-                        <ul class="nav flex-column mb-auto">
-                            <li class="nav-item" th:if = ${!#strings.isEmpty(opt)}>
-                                <a class="nav-link d-flex align-items-center gap-2" th:href="@{'/admin/' + ${opt} + '/trash-can'}">
-                                    <i class="bi bi-trash"></i>
-                                    Thùng rác
-                                </a>
-                            </li>
-                            <li class="nav-item" th:if = ${!#strings.isEmpty(opt)}>
-                                <a class="nav-link d-flex align-items-center gap-2" th:href="@{'/admin/' + ${opt} + '/add'}">
-                                    <i class="bi bi-file-earmark-plus-fill"></i>
-                                    Tạo mới
-                                </a>
-                            </li>
-                        </ul>
 
                         <hr class="my-3">
 
                         <ul class="nav flex-column mb-auto">
-                            <li class="nav-item">
-                                &nbsp; <i class="bi bi-gear-wide-connected"></i>
-                                Settings
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link d-flex align-items-center gap-2" href="/">
+                            <li class="nav-item" sec:authorize="isAuthenticated()">
+                                <a class="nav-link d-flex align-items-center gap-2 btn" href="/logout">
                                     <i class="bi bi-door-closed-fill"></i>
                                     Sign out
                                 </a>
@@ -276,7 +294,7 @@
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                     <h1 class="h2">Dashboard</h1>
                 </div>
-                <section layout:fragment="content" >
+                <section layout:fragment="content" id="section-content-dashboard">
                     <!-- Nội dung cụ thể của từng trang sẽ được đặt tại đây -->
                 </section>
             </main>

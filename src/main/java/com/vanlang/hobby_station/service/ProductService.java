@@ -1,5 +1,6 @@
 package com.vanlang.hobby_station.service;
 
+import com.vanlang.hobby_station.model.Order.OrderStatus;
 import com.vanlang.hobby_station.model.Product;
 import com.vanlang.hobby_station.repository.OrderDetailRepository;
 import com.vanlang.hobby_station.repository.ProductRepository;
@@ -13,7 +14,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 import java.util.stream.Collectors;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -150,21 +150,34 @@ public class ProductService {
     }
 
     // Danh sách tổng sản lượng bán ra của từng sản phẩm
-
-    public List<Object[]> getTopSelling() {
+    // lấy tất cả bỏ qua điều kiện
+    public List<Object[]> getSelling() {
         return orderDetailRepository.findTopSellingProducts();
     }
+    
+    // lấy tất cả với điều kiện là status của order
+    public List<Object[]> getTopSellingProductsByStatus(OrderStatus status) {
+        List<Object[]> topSellingProducts = orderDetailRepository.findTopSellingProductsByStatus(status);
+        return topSellingProducts;
+    }
 
+    // lấy tất cả với điều kiện là isDelete
     public List<Object[]> getTopSellingProductsByIsDeleted(boolean isDelete) {
         return orderDetailRepository.findTopSellingProductsByIsDeleted(isDelete);
     }
 
-        // Lấy danh sách các sản phẩm mới nhất với isDelete = false
+
+    // Lấy danh sách các sản phẩm mới nhất với isDelete = false và đã được chuyển/giao
     public List<Product> getTopSellingProducts(int limit) {
-        List<Product> allProducts = orderDetailRepository.findTopSellingProductsObj(false);
-        limit = Math.min(limit, allProducts.size());
-        return allProducts.stream()
-                          .limit(limit)
-                          .collect(Collectors.toList());
+        try {
+            List<Product> allProducts = orderDetailRepository.findTopSellingProductsObj(false, OrderStatus.DELIVERED);
+            limit = Math.min(limit, allProducts.size());
+            return allProducts.stream()
+                              .limit(limit)
+                              .collect(Collectors.toList());
+        } catch (Exception e) {
+            // TODO: handle 
+            return null;
+        }
     }
 }

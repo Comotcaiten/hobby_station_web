@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{dashboard-layout}">
 <head>
-    <title>Dashboard</title>
+    <title>Report</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="/js/dashboard.js"></script>
@@ -26,6 +26,26 @@
                 <h3>Số Lượng Khách hàng</h3>
                 <h4 th:text="'Tổng khách hàng: ' + ${khachHangs}">Tổng khách hàng: EROR</h4>
             </div>
+        </div>
+        <!-- Thống Kê Sản Phẩm -->
+        <div class="row mt-4">
+            <h3>Sản phẩm và các sản lượng được bán ra</h3>
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Tổng sản lượng</th>
+                </tr>
+                </thead>
+                <tbody id="danh-sach-sp-ban-chay" class="danh-sach-sp-ban-chay">
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Tổng sản lượng</th>
+                    </tr> 
+                </tbody>
+            </table> 
         </div>
     </div>
 </section>

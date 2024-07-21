@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{dashboard-layout}">
+
+<head>
+    <title>Orders View</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <layout:fragment name="head"></layout:fragment>
+</head>
+
+<body>
+    <section layout:fragment="content">
+        <h1 class="mt-4">Order Details</h1>
+        <div>
+            <h3>Order ID: <span th:text="${order.id}"></span></h3>
+            <p><strong>Tên:</strong> <span th:text="${order.customerName}"></span></p>
+            <p><strong>Email:</strong> <span th:text="${order.email}"></span></p>
+            <p><strong>Phone Number:</strong> <span th:text="${order.phoneNumber}"></span></p>
+            <p><strong>Địa chỉ giao hàng:</strong> <span th:text="${order.shippingAddress}"></span></p>
+            <p><strong>Note/Ghi chú:</strong> <span th:text="${order.orderNote}"></span></p>
+            <p><strong>Payment Method:</strong> <span th:text="${order.paymentMethod}"></span></p>
+            <p><strong>Trạng thái đơn hàng:</strong> <span th:text="${order.status}"></span></p>
+            <p><strong>Tổng giá tiền:</strong> <span th:text="${#numbers.formatDecimal(order.totalAmount, 0, 'COMMA', 0, 'POINT')} + ' đ'"></span></p>
+            <p><strong>Ngày đặt:</strong> <span th:text="${order.createdAt}"></span></p>
+            <p><strong>Ngày giao:</strong> <span th:text="${order.deliveryDate}"></span></p>
+            <h3>Order Details:</h3>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="detail : ${order.orderDetails}">
+                        <td th:text="${detail.product.name}"></td>
+                        <td th:text="${detail.quantity}"></td>
+                        <td th:text="${#numbers.formatDecimal(detail.product.price, 0, 'COMMA', 0, 'POINT')} + ' đ'"></td>
+                        <!-- <td th:text="${detail.product.price * detail.quantity}"></td> -->
+                        <td th:text="${#numbers.formatDecimal(detail.product.price * detail.quantity, 0, 'COMMA', 0, 'POINT')} + ' đ'"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <a href="/admin/orders" class="btn btn-secondary">Back to List</a>
+    </section>
+</body>
+</html>

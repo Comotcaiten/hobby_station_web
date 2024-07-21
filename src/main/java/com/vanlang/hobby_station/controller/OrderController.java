@@ -44,12 +44,6 @@ public class OrderController {
     @PostMapping("/submit")
     public String submitOrder(String customerName, String shippingAddress, String phoneNumber, String email, String orderNote, String paymentMethod) {
         List<CartItem> cartItems = cartService.getCartItems();
-        
-        System.out.println(shippingAddress);
-        System.out.println(phoneNumber);
-        System.out.println(email);
-        System.out.println(orderNote);
-
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication(); 
         String username = authentication.getName();
         if (cartItems.isEmpty() || !userService.usernameExists(username)) {

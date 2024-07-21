@@ -44,12 +44,12 @@ public class SecurityConfig {
         return http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/css/**", "/js/**", "/", "/oauth/**", "/register", "/error", "/products", "/cart", "/cart/**")
+                        .requestMatchers("/css/**", "/js/**", "/", "/oauth/**", "/register", "/error", "/product/**", "/shop", "/cart", "/search")
                         .permitAll() // Cho phép truy cập không cần xác thực.
+                        .requestMatchers("/admin/**", "/api/admin/**", "api/orders/**", "/js/adminProducts", "/js/dashboard")
+                        .hasAnyAuthority("ADMIN") // Chỉ cho phép ADMIN truy cập.   
                         .requestMatchers("/api/**")
                         .permitAll() // API mở cho mọi người dùng.
-                        .requestMatchers("/products/edit/**", "/products/add", "/products/delete", "/admin/**")
-                        .hasAnyAuthority("ADMIN") // Chỉ cho phép ADMIN truy cập.
                         .anyRequest().authenticated()
                 )
                 .logout(logout -> logout
