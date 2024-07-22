@@ -56,6 +56,12 @@ public class ProductsCrudController {
         if (product.getImg().isEmpty() || product.getImg().equalsIgnoreCase(null)) {
             product.setImg("/image/default.png");
         }
+        if (product.getBrand() == null) {
+            bindingResult.rejectValue("brand", "error.products", "Chưa có brand");
+        }
+        if (product.getCategory() == null) {
+            bindingResult.rejectValue("category", "error.category", "Chưa có category");
+        }
         if (bindingResult.hasErrors()) {
             var errors = bindingResult.getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).toArray(String[]::new);
             model.addAttribute("errors", errors);

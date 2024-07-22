@@ -5,15 +5,12 @@ $(document).ready(function () {
 // Function load các products theo category
 // Function to load products by category
 function loadProductsByCategory(id) {
-  let url =
-    id == null ? `/api/products` : `/api/products/categories/${id}`;
-
+  let url = id == null ? `/api/products` : `/api/products/categories/${id}`;
+  displayTitileSP(id);  
   $.ajax({
     url: url,
     type: "GET",
     success: function (products) {
-      console.log("Products loaded:", products);
-
       let productList = "";
       if (products.length > 0) {
         $.each(products, function (index, product) {
@@ -42,7 +39,7 @@ function loadProductsByCategory(id) {
       } else {
         productList = `
           <div class="px-4 py-5 my-5 text-center">
-              <h1 class="display-5 fw-bold text-body-emphasis">Trang chính</h1>
+              <h1 class="display-5 fw-bold text-body-emphasis">Shop chưa có sản phẩm</h1>
               <div class="col-lg-6 mx-auto">
                   <p class="lead mb-4">Cửa hàng hiện chưa có sản phẩm nào được thêm. Vui lòng quay lại sau để xem thêm.</p>
                   <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
@@ -70,7 +67,7 @@ function loadCategoriesForDB() {
       let categoryList = "";
       categoryList += `
       <li>
-        <a href="#All"
+        <a href="#All" class="link-loai-sp"
           onclick="loadProductsByCategory(); return false;">
           All
         </a>
@@ -90,4 +87,21 @@ function loadCategoriesForDB() {
       listCategoryShophtml.html(categoryList);
     },
   });
+}
+
+function displayTitileSP(id) {
+  let title = $("#title-SPNB")
+  if (id == null) {
+    title.empty();
+    title.html("Tất cả sản phẩm");
+  }
+  else {
+    $.ajax({
+      url: "/api/categories/" + id,
+      type: "GET",
+      success: function (data) {
+        title.html("Tất cả sản phẩm - " + data.name);
+      }
+    })
+  }
 }

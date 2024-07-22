@@ -8,8 +8,8 @@
 </head>
 <body>
 <section layout:fragment="content" class="container mt-3">
-    <h1>Place Your Order</h1>
-    <form th:action="@{/order/submit}" method="post">
+    <form th:action="@{/order/submit}" method="post" class="form-Checkout">
+        <h1>Place Your Order</h1>
         <div class="mb-3">
             <label for="customerName" class="form-label">Your Name:</label>
             <input type="text" id="customerName"

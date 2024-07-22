@@ -13,7 +13,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
-import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 
 @Configuration
 @EnableWebSecurity
@@ -44,7 +43,7 @@ public class SecurityConfig {
         return http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/css/**", "/js/**", "/", "/oauth/**", "/register", "/error", "/product/**", "/shop", "/cart", "/search")
+                        .requestMatchers("/css/**", "/js/**", "/image/**", "/", "/oauth/**", "/register", "/error", "/product/**", "/shop", "/cart", "/search")
                         .permitAll() // Cho phép truy cập không cần xác thực.
                         .requestMatchers("/admin/**", "/api/admin/**", "api/orders/**", "/js/adminProducts", "/js/dashboard")
                         .hasAnyAuthority("ADMIN") // Chỉ cho phép ADMIN truy cập.   

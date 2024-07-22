@@ -23,7 +23,6 @@ public class CategoryApiController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Category> getProductById(@PathVariable Long id) {
-        System.out.println("Get " + id);
         Category category = categoryService.getCategoryById(id).orElseThrow(() -> new RuntimeException("Category not found on :: " + id));
         return ResponseEntity.ok().body(category);
     }

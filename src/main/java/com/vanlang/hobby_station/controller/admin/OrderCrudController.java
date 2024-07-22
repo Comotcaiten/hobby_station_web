@@ -1,7 +1,6 @@
 package com.vanlang.hobby_station.controller.admin;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -60,13 +59,14 @@ public class OrderCrudController {
     @GetMapping("/delete/{id}")
     public String deleteOrder(@PathVariable("id") Long id, Model model) {
         try {
-            Order order = orderService.getOrderById(id)
+            orderService.getOrderById(id)
             .orElseThrow(() -> new RuntimeException("Order not found"));
             
             orderService.deleteOrder(id);
         }
         catch(Exception e) {
-
+            System.out.println("Có Lỗi ở delete của Orders - GetMapping() - OrderCrudController");
+            e.printStackTrace();
         }
         return "redirect:/admin/orders";
     }
@@ -75,10 +75,10 @@ public class OrderCrudController {
     public String deleteAllOrderCanceled(Model model) {
         try {            
             orderService.deleteOrdersByStatus(OrderStatus.CANCELED);
-            System.out.println("PASSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSs");
         }
         catch(Exception e) {
-            System.out.println("Lỗi");
+            System.out.println("Lỗi ở delete-all của Orders - GetMapping() - OrderCrudController");
+            e.printStackTrace();
         }
         return "redirect:/admin/orders";
     }

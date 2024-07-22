@@ -11,7 +11,7 @@
 <body>
   <section layout:fragment="content">
     <div class="container mt-5">
-      <h2 class="mb-4">Danh Sách Đơn Hàng</h2>
+      <center><h2 class="mb-4 form-Checkout">Danh Sách Đơn Hàng</h2></center>
       <section th:if="${orders}" class="container my-5">
         <div class="row">
           <div class="col-12">
@@ -31,6 +31,12 @@
                         <div class="d-flex justify-content-between align-items-center mb-4">
                           <p class="small text-muted mb-0" th:text="'Ngày đặt hàng: ' + ${order.createdAt}">
                             Ngày đặt hàng
+                          </p>
+                          <p class="small text-muted mb-0" th:if="${order.deliveryDate}" th:text="'Ngày giao hàng: ' + ${order.deliveryDate}">
+                            Ngày giao hàng
+                          </p>
+                          <p class="small text-muted mb-0" th:unless="${order.deliveryDate}">
+                            Ngày giao hàng: -----
                           </p>
                         </div>
                         <div class="card shadow-0 border mb-4" th:each="detail : ${order.orderDetails}">
@@ -52,7 +58,7 @@
                                   <p class="text-muted mb-0"
                                     th:text="'Giá tiền: ' + ${#numbers.formatDecimal(detail.product.price, 0, 'COMMA', 0, 'POINT')} + 
                                         ' x  Số lượng: ' + ${#numbers.formatDecimal(detail.quantity, 0, 'COMMA', 0, 'POINT')} +
-                                        ' = ' + ${#numbers.formatDecimal(detail.quantity * detail.product.price, 0, 'COMMA', 0, 'POINT')} + ' VNĐ'">
+                                        ' = ' + ${#numbers.formatDecimal(detail.quantity * detail.product.price, 0, 'COMMA', 0, 'POINT')} + ' đ'">
                                   </p>
                                 </div>
                               </div>
@@ -91,9 +97,9 @@
                               border-bottom-left-radius: 10px;
                               border-bottom-right-radius: 10px;
                             ">
-                        <h5 class="d-flex align-items-center justify-content-end text-white text-uppercase mb-0">
+                        <h5 class="d-flex align-items-center justify-content-end text-white mb-0">
                           Tổng giá:
-                          <span class="h2 mb-0 ms-2"
+                          <span class="mb-0 ms-2"
                             th:text="${#numbers.formatDecimal(order.totalAmount, 0, 'COMMA', 0, 'POINT')} + ' đ'">$1040</span>
                         </h5>
                         <div class=""

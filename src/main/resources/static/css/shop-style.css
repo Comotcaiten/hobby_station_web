@@ -52,6 +52,7 @@ aside {
   background-color: #f4f4f4;
   padding: 20px;
   width: 250px;
+  border-radius: 10px;
 }
 
 #sidebar {
@@ -97,6 +98,14 @@ h2.SPBC {
   font-size: 24px;
   padding: 10px;
   border-radius: 10px;
+}
+
+h2.SPNB {
+  background-color: white ;
+  margin: 0;
+}
+.container-SPNB {
+  margin-bottom: 10px;
 }
 
 .sanpham {
@@ -195,9 +204,8 @@ h2.SPBC {
     margin-right: 10px;
   }
 
-  .list-link a {
+  .list-link li a {
     display: flex;
     justify-content: center; /* Căn giữa nội dung liên kết */
-    background-color: #d9534f;
   }
 }
