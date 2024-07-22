@@ -37,7 +37,7 @@ public class ProductService {
 
     // By Name
     public List<Product> searchProductsByName(String name) {
-        return productRepository.findByNameContaining(name);
+        return productRepository.findByNameContainingAndIsDeleted(name, false);
     }
     
     // Retrieve products by Brand status

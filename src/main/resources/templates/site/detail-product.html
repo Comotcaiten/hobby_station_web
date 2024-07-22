@@ -51,11 +51,14 @@
       <p>Recommended by</p>
       <h3>Andrew Palmer</h3>
     </div>
-    <form th:action="@{/cart/add}" method="post" sec:authorize="isAuthenticated()" class="action">
+    <form th:if="${!product.isDeleted}" th:action="@{/cart/add}" method="post" sec:authorize="isAuthenticated()" class="action">
         <input type="hidden" name="quantity" min="1" value="1">
         <input type="hidden" th:value="${product.id}" name="productId"/>
         <button type="submit" class="btn btn-warning btn-sm">Thêm Vào Giỏ</button>
     </form>
+    <a th:if="${product.isDeleted}" th:href="@{/shop}" sec:authorize="isAuthenticated()" class="action-btn">
+      <button type="submit" class="btn btn-secondary btn-sm">Đã ngừng kinh doanh  </button>
+  </a>
   </div>
 </div>
   </main>

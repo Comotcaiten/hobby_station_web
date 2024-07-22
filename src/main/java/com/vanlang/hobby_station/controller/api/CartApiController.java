@@ -1,12 +1,12 @@
 package com.vanlang.hobby_station.controller.api;
 import com.vanlang.hobby_station.model.CartItem;
 import com.vanlang.hobby_station.service.CartService;
+import com.vanlang.hobby_station.service.ProductService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 
 @RestController
@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class CartApiController {
     @Autowired
     private CartService cartService;
+    @Autowired
+    private ProductService productService;
 
     @GetMapping
     public List<CartItem> getCartItems() {
@@ -22,12 +24,18 @@ public class CartApiController {
 
     @PostMapping("/add")
     public void addToCart(@RequestParam Long productId, @RequestParam int quantity) {
-        cartService.addToCart(productId, quantity);
+        if(productService.getProductByIdAndIsDeleted(productId, false).isPresent())
+        {
+            cartService.addToCart(productId, quantity);
+        }
     }
 
     @PostMapping("/update")
     public void updateCartItem(@RequestParam Long productId, @RequestParam int quantity) {
-        cartService.updateCartItem(productId, quantity);
+        if(productService.getProductByIdAndIsDeleted(productId, false).isPresent())
+        {
+            cartService.updateCartItem(productId, quantity);
+        }
     }
 
     @PostMapping("/remove")

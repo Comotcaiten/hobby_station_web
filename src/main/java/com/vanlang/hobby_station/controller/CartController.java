@@ -1,6 +1,8 @@
 package com.vanlang.hobby_station.controller;
 
 import com.vanlang.hobby_station.service.CartService;
+import com.vanlang.hobby_station.service.ProductService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +14,8 @@ public class CartController {
 
     @Autowired
     private CartService cartService;
+    @Autowired
+    private ProductService productService;
 
     @GetMapping
     public String showCart(Model model) {
@@ -21,7 +25,10 @@ public class CartController {
 
     @PostMapping("/add")
     public String addToCart(@RequestParam Long productId, @RequestParam int quantity) {
-        cartService.addToCart(productId, quantity);
+        if (productService.getProductByIdAndIsDeleted(productId, false).isPresent()) {
+            // Xử lý khi tìm thấy sản phẩm
+            cartService.addToCart(productId, quantity);
+        }
         return "redirect:/cart";
     }
 
@@ -40,6 +47,9 @@ public class CartController {
     @PostMapping("/update")
     @ResponseBody
     public void updateCartItem(@RequestParam Long productId, @RequestParam int quantity) {
-        cartService.updateCartItem(productId, quantity);
+        if (productService.getProductByIdAndIsDeleted(productId, false).isPresent()) {
+            // Xử lý khi tìm thấy sản phẩm
+            cartService.updateCartItem(productId, quantity);
+        }
     }
 }

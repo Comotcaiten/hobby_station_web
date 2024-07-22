@@ -30,7 +30,7 @@ public class ProductApiController {
     // Cho mọi người dùng
     @GetMapping("/{id}")
     public ResponseEntity<Product> getProductById(@PathVariable Long id) {
-        Product product = productService.getProductById(id).orElseThrow(() -> new RuntimeException("Product not found on :: " + id));
+        Product product = productService.getProductByIdAndIsDeleted(id, false).orElseThrow(() -> new RuntimeException("Product not found on :: " + id));
         return ResponseEntity.ok().body(product);
     }
 
@@ -39,7 +39,7 @@ public class ProductApiController {
     @GetMapping("/search")
     public List<Product> searchProducts(@RequestParam(value = "name", required = false) String name) {
         if (name == null || name.trim().isEmpty()) {
-            return productService.getAllProducts();
+            return productService.getProductsByIsDeleted(false);
         } else {
             return productService.searchProductsByName(name);
         }
