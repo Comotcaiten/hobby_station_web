@@ -6,5 +6,5 @@ Project website use JavaSpring boots
 >>>>>>> 382eab2 (test)
 # Make by Comocaiten
 my Github: https://github.com/Comotcaiten
-Đại học Văn Lang - K28 - CNTT - Phạm Thanh Phúc - 2274802010690
+K28 - Phạm Thanh Phúc
 Đồ án môn học Java nâng cao
