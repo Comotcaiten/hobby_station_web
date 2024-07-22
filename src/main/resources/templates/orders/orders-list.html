@@ -11,16 +11,17 @@
 <body>
     <section layout:fragment="content">
         <h1 class="mt-4">Orders List</h1>
-        <table class="table">
+        <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>Customer Name</th>
-                    <th>Email</th>
-                    <th>Phone Number</th>
-                    <th>Status</th>
-                    <th>Total Amount</th>
-                    <th>Actions</th>
+                    <th scope="col">ID</th>
+                    <th scope="col">Customer Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Phone Number</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Total Amount</th>
+                    <th scope="col">Date</th>
+                    <center><th scope="col">Actions</th></center>
                 </tr>
             </thead>
             <tbody>
@@ -31,6 +32,7 @@
                     <td th:text="${order.phoneNumber}"></td>
                     <td th:text="${order.status}"></td>
                     <td th:text="${#numbers.formatDecimal(order.totalAmount, 0, 'COMMA', 0, 'POINT')} + ' đ'"></td>
+                    <td th:text="${#dates.format(order.createdAt, 'dd-MMMM-yyyy')}"></td>
                     <td>
                         <a th:href="@{/admin/orders/{id}(id=${order.id})}" class="btn btn-info btn-sm">View</a>
                         <a th:href="@{/admin/orders/edit/{id}(id=${order.id})}" class="btn btn-warning btn-sm">Edit</a>
