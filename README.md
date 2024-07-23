@@ -1,10 +1,15 @@
-<<<<<<< HEAD
-# hobby_station_web
-Project website use JavaSpring boots
-=======
-# hobby_station
->>>>>>> 382eab2 (test)
-# Make by Comocaiten
-my Github: https://github.com/Comotcaiten
-K28 - Phạm Thanh Phúc
-Đồ án môn học Java nâng cao
+Java SpringBoot
+
+ĐỒ ÁN CUỐI KỲ
+LẬP TRÌNH JAVA NÂNG CAO
+
+Chủ đề: Xây Dựng Website Thương Mại
+
+SVTH: Phạm Thanh Phúc
+MSSV: 2274802010690
+
+SVTH: Nguyễn Thái Trọng Nhân
+MSSV: 2274802010597
+
+SVTH: Trương Văn Khải
+MSSV: 2274802010368
